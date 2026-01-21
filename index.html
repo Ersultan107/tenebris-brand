@@ -2,91 +2,45 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TENEBRIS | Luxury Watches & Leather</title>
+    <title>TENEBRIS | Brand</title>
     <style>
-        body { margin: 0; background: #000; color: #fff; font-family: 'Times New Roman', serif; line-height: 1.6; }
+        body { margin: 0; background: #000; color: #fff; font-family: serif; text-align: center; }
+        header { padding: 50px; border-bottom: 1px solid #111; }
+        .logo { font-size: 40px; letter-spacing: 15px; }
         
-        /* Логотип T|E через CSS */
-        .logo-container { padding-top: 60px; text-align: center; }
-        .te-logo {
-            display: inline-block;
-            border: 2px solid #fff;
-            padding: 10px 20px;
-            font-size: 50px;
-            letter-spacing: -5px;
-            font-family: 'Georgia', serif;
-            position: relative;
-            line-height: 1;
-        }
-        .te-logo::after {
-            content: "";
-            position: absolute;
-            top: 50%; left: 15%; right: 15%;
-            height: 1px; background: #fff;
-        }
-
-        .brand-title { text-align: center; font-size: 50px; letter-spacing: 15px; margin: 20px 0 10px; text-transform: uppercase; }
-        .brand-sub { text-align: center; color: #666; letter-spacing: 4px; font-size: 12px; text-transform: uppercase; margin-bottom: 60px; }
-
-        section { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .founder { padding: 50px; display: flex; justify-content: center; align-items: center; gap: 20px; }
+        .founder img { width: 120px; border: 1px solid #222; }
         
-        /* Блок Основателя */
-        .founder-block { display: flex; align-items: center; gap: 40px; background: #050505; padding: 40px; border: 1px solid #111; margin-bottom: 60px; flex-wrap: wrap; justify-content: center; }
-        .founder-photo { width: 250px; height: 350px; border: 1px solid #333; object-fit: cover; }
-        .founder-info { flex: 1; min-width: 300px; }
-        .founder-info h2 { font-size: 28px; letter-spacing: 3px; margin-top: 0; }
-        .founder-info p { color: #aaa; font-style: italic; }
-
-        /* Блок Продуктов */
-        .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .product-card { border: 1px solid #111; padding: 20px; background: #050505; text-align: center; transition: 0.3s; }
-        .product-card:hover { border-color: #333; }
-        .product-card h3 { letter-spacing: 3px; text-transform: uppercase; margin: 15px 0; font-size: 18px; }
-        .product-card p { color: #666; font-size: 14px; }
-        .product-tag { color: #fff; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid #333; display: inline-block; margin-bottom: 10px; }
-
-        footer { text-align: center; padding: 60px 20px; color: #444; border-top: 1px solid #111; font-size: 12px; letter-spacing: 2px; }
-        .slogan-final { font-size: 20px; color: #fff; margin-bottom: 20px; letter-spacing: 5px; }
+        /* Твоя новая карточка */
+        .product-section { padding: 50px 0; }
+        .card-img { width: 90%; max-width: 800px; border: 1px solid #1a1a1a; transition: 0.3s; }
+        .card-img:hover { border-color: #555; }
+        
+        footer { padding: 50px; color: #333; font-size: 12px; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
-    <div class="logo-container">
-        <div class="te-logo">TE</div>
+    <header>
+        <div class="logo">TENEBRIS</div>
+        <p style="color: #444; letter-spacing: 3px;">MASTERPIECES IN STEEL & SKIN</p>
+    </header>
+
+    <div class="founder">
+        <img src="me.jpg" alt="Founder">
+        <div style="text-align: left;">
+            <h2 style="margin:0;">Tleuberdi Ersultan</h2>
+            <p style="color: #666; max-width: 300px;">Основатель бренда TENEBRIS. Мы создаем вещи для тех, кто владеет ночью.</p>
+        </div>
     </div>
 
-    <h1 class="brand-title">TENEBRIS</h1>
-    <p class="brand-sub">Masterpieces in Steel & Skin</p>
-
-    <section>
-        <div class="founder-block">
-            <img src="me.jpg" alt="Tleuberdi Ersultan" class="founder-photo">
-            <div class="founder-info">
-                <div class="product-tag">The Visionary</div>
-                <h2>Tleuberdi Ersultan</h2>
-                <p>"Мы создаем не просто вещи, а символы статуса. TENEBRIS объединяет инженерную точность стали и природную роскошь кожи в изделиях, которые не имеют срока годности."</p>
-            </div>
-        </div>
-
-        <div class="products">
-            <div class="product-card">
-                <div class="product-tag">Collection I</div>
-                <h3>Luxury Watches</h3>
-                <p>Механика высшего класса, сапфировое стекло и корпус из хирургической стали. Точность, которая принадлежит вам.</p>
-            </div>
-            <div class="product-card">
-                <div class="product-tag">Collection II</div>
-                <h3>Bespoke Leather</h3>
-                <p>Сумки и аксессуары из редких сортов кожи. Ручная выделка и швы, гарантирующие вечность.</p>
-            </div>
-        </div>
-    </section>
+    <div class="product-section">
+        <p style="color: #888; letter-spacing: 5px; margin-bottom: 20px;">LATEST RELEASE</p>
+        <img src="card.jpg" class="card-img" alt="Watch Card">
+    </div>
 
     <footer>
-        <div class="slogan-final">“OWN THE NIGHT”</div>
-        <p>55/2 MANGILIK EL AVE. | +7 707 553 52 60</p>
-        <p>INSTAGRAM: @TEMPORAL.ELEGANCE</p>
+        EST. 2025 | ALMATY | +7 707 553 52 60
     </footer>
 
 </body>
