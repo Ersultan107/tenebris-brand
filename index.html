@@ -3,148 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TENEBRIS | Masterpieces</title>
+    <title>TENEBRIS | Masterpieces in Steel & Skin</title>
     <style>
-        /* Основной стиль — глубокий черный и минимализм */
         body { 
             margin: 0; 
             background: #000; 
             color: #fff; 
             font-family: 'Times New Roman', serif; 
-            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* Анимация появления контента */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* Плавное появление */
+        .fade-in { animation: fadeIn 1.5s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        header { 
-            padding: 60px 20px; 
+        header { padding: 80px 20px; text-align: center; }
+        .logo { font-size: 45px; letter-spacing: 15px; margin: 0; text-transform: uppercase; }
+        .subtitle { color: #444; font-size: 10px; letter-spacing: 5px; text-transform: uppercase; margin-top: 10px; }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+        /* Блок Основателя */
+        .founder-section { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 40px; 
+            margin-bottom: 100px;
+        }
+        .founder-img { width: 140px; height: 190px; object-fit: cover; border: 1px solid #1a1a1a; filter: grayscale(1); }
+        .founder-text h2 { font-size: 22px; font-weight: normal; margin-bottom: 10px; letter-spacing: 2px; }
+        .founder-text p { color: #777; max-width: 400px; font-style: italic; font-size: 15px; }
+
+        /* Блок О БРЕНДЕ — Добавляем подробности */
+        .about-section { 
             text-align: center; 
-            animation: fadeIn 1s ease-out;
+            margin-bottom: 120px; 
+            padding: 60px 0;
+            border-top: 1px solid #111;
+            border-bottom: 1px solid #111;
         }
+        .about-section h3 { font-size: 12px; letter-spacing: 6px; color: #555; margin-bottom: 30px; }
+        .about-content { max-width: 700px; margin: 0 auto; color: #aaa; font-size: 17px; letter-spacing: 1px; }
 
-        .logo { 
-            font-size: clamp(30px, 8vw, 50px); 
-            letter-spacing: 15px; 
-            font-weight: 300;
-            text-transform: uppercase;
-            margin: 0;
-        }
-
-        .subtitle {
-            color: #444;
-            font-size: 10px;
-            letter-spacing: 6px;
-            margin-top: 15px;
-            text-transform: uppercase;
-        }
-
-        /* Секция основателя — делаем компактнее и элегантнее */
-        .founder-wrap {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            padding: 40px 20px;
-            max-width: 900px;
-            margin: 0 auto;
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        .founder-img {
-            width: 130px;
-            height: 180px;
-            object-fit: cover;
-            border: 1px solid #1a1a1a;
-            filter: grayscale(100%);
-            transition: 0.5s;
-        }
-
-        .founder-img:hover { filter: grayscale(0%); border-color: #333; }
-
-        .founder-info h2 { font-size: 20px; font-weight: normal; margin: 0; letter-spacing: 2px; }
-        .founder-info p { color: #666; font-size: 14px; max-width: 350px; line-height: 1.6; font-style: italic; }
-
-        /* Секция с часами — ИСПРАВЛЯЕМ РАЗМЕР */
-        .product-box {
-            padding: 80px 20px;
-            text-align: center;
-            background: linear-gradient(to bottom, #000, #050505, #000);
-            animation: fadeIn 2s ease-out;
-        }
-
-        .release-tag {
-            font-size: 10px;
-            color: #888;
-            letter-spacing: 5px;
-            margin-bottom: 40px;
-            display: block;
-        }
-
-        .card-container {
+        /* Блок с часами — Исправляем рамку */
+        .product-section { text-align: center; margin-bottom: 100px; }
+        .label { font-size: 10px; color: #444; letter-spacing: 4px; margin-bottom: 30px; display: block; }
+        
+        .card-frame { 
             display: inline-block;
-            position: relative;
-            max-width: 700px; /* Ограничиваем ширину */
-            width: 90%;
-            border: 1px solid #111;
-            padding: 15px; /* Создаем эффект рамки */
-            background: #020202;
-            transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .card-container img {
+            border: 1px solid #222; /* Плотная тонкая рамка */
+            line-height: 0;
+            transition: 0.5s;
+            max-width: 600px; /* Размер самой карточки */
             width: 100%;
-            height: auto;
-            max-height: 80vh; /* Чтобы фото не было больше экрана */
-            display: block;
-            object-fit: contain;
         }
+        .card-frame img { width: 100%; height: auto; }
+        .card-frame:hover { border-color: #444; }
 
-        .card-container:hover {
-            border-color: #222;
-            box-shadow: 0 0 40px rgba(255,255,255,0.02);
-            transform: scale(1.01);
-        }
+        /* Будущие коллекции */
+        .upcoming { text-align: center; color: #222; font-size: 11px; letter-spacing: 3px; margin-bottom: 100px; }
 
-        footer {
-            padding: 100px 20px;
-            text-align: center;
-            border-top: 1px solid #0a0a0a;
-            color: #222;
-            font-size: 11px;
-            letter-spacing: 3px;
-        }
+        footer { padding: 60px; text-align: center; border-top: 1px solid #111; color: #333; font-size: 11px; letter-spacing: 2px; }
 
-        /* Адаптив для мобилок */
-        @media (max-width: 600px) {
-            .founder-wrap { flex-direction: column; text-align: center; }
-            .founder-info p { text-align: center; }
+        @media (max-width: 768px) {
+            .founder-section { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <header>
+    <header class="fade-in">
         <h1 class="logo">TENEBRIS</h1>
         <div class="subtitle">Masterpieces in Steel & Skin</div>
     </header>
 
-    <div class="founder-wrap">
-        <img src="me.jpg" alt="Founder" class="founder-img">
-        <div class="founder-info">
-            <h2>Tleuberdi Ersultan</h2>
-            <p>“Мы не просто продаем время. Мы создаем символы для тех, кто берет от жизни всё. Каждая деталь — это бескомпромиссная страсть.”</p>
-        </div>
-    </div>
+    <div class="container fade-in">
+        
+        <section class="founder-section">
+            <img src="me.jpg" alt="Founder" class="founder-img">
+            <div class="founder-text">
+                <h2>Tleuberdi Ersultan</h2>
+                <p>«Моя цель — создавать не просто аксессуары, а материальное воплощение характера. TENEBRIS — это эстетика силы и ночного минимализма». </p>
+            </div>
+        </section>
 
-    <div class="product-box">
-        <span class="release-tag">LATEST RELEASE</span>
-        <div class="card-container">
-            <img src="card.jpg" alt="Night Operator I Card">
-        </div>
+        <section class="about-section">
+            <h3>PHILOSOPHY</h3>
+            <div class="about-content">
+                TENEBRIS специализируется на создании эксклюзивных изделий, где холодная сталь встречается с премиальной кожей. Мы верим в темную эстетику, безупречную инженерию и ограниченные тиражи. Каждый предмет — от автоматических часов до аксессуаров ручной работы — создан для тех, кто ценит скрытое превосходство.
+            </div>
+        </section>
+
+        <section class="product-section">
+            <span class="label">CURRENT RELEASE</span>
+            <div class="card-frame">
+                <img src="card.jpg" alt="Night Operator I">
+            </div>
+        </section>
+
+        <section class="upcoming">
+            STEEL BACELETS & LEATHER GOODS — COMING SOON
+        </section>
+
     </div>
 
     <footer>
