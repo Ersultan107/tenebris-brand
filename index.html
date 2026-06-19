@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,8 +32,31 @@
     --shadow-md:0 10px 30px rgba(15,23,42,0.07);
     --shadow-accent:0 14px 36px rgba(37,99,235,0.18);
   }
+
+  /* Стили для темной темы */
+  [data-theme="dark"] {
+    --bg:#0f172a;
+    --bg-soft:#1e293b;
+    --ink:#f8fafc;
+    --ink-soft:#94a3b8;
+    --ink-faint:#64748b;
+    --accent:#3b82f6;
+    --accent-dark:#60a5fa;
+    --accent-soft:rgba(59,130,246,0.15);
+    --accent-soft-2:rgba(59,130,246,0.3);
+    --green:#22c55e;
+    --green-bg:rgba(34,197,94,0.1);
+    --green-border:#15803d;
+    --red:#ef4444;
+    --red-bg:rgba(239,68,68,0.1);
+    --red-border:#b91c1c;
+    --border:#334155;
+    --shadow-md:0 10px 30px rgba(0,0,0,0.3);
+    --shadow-accent:0 14px 36px rgba(59,130,246,0.1);
+  }
+
   *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
+  html,body{margin:0;padding:0; transition: background 0.3s, color 0.3s;}
   body{
     background:var(--bg);
     color:var(--ink);
@@ -71,6 +94,29 @@
   .brand-text{display:flex;flex-direction:column;line-height:1.15;}
   .brand-text strong{font-size:14.5px;font-weight:700;color:var(--ink);}
   .brand-text span{font-size:12px;color:var(--ink-faint);}
+  
+  .top-actions {
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .theme-toggle {
+    background: var(--bg-soft);
+    border: 1.5px solid var(--border);
+    color: var(--ink);
+    padding: 6px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+  }
+  .theme-toggle:hover {
+    border-color: var(--accent);
+  }
   .badge-kicker{
     font-size:11.5px;font-weight:700;letter-spacing:.06em;
     color:var(--accent-dark);background:var(--accent-soft);
@@ -144,6 +190,9 @@
     background:linear-gradient(135deg, #0f172a, #1e3a8a);
     border:none;color:white;
   }
+  [data-theme="dark"] .set-card.full {
+    background:linear-gradient(135deg, #1e293b, #1e3a8a);
+  }
   .set-card.full .num{color:white;font-size:18px;}
   .set-card.full .meta{color:#c7d6f7;}
   .set-card.full.selected{outline:3px solid var(--accent-soft-2);}
@@ -172,10 +221,13 @@
   .primary-btn:disabled{
     background:#cbd5e1; box-shadow:none; cursor:not-allowed; color:#94a3b8;
   }
+  [data-theme="dark"] .primary-btn:disabled {
+    background:#334155; color:#64748b;
+  }
   .secondary-btn{
     width:100%;
     border:1.5px solid var(--border);
-    background:white;
+    background:var(--bg);
     color:var(--ink);
     font-size:15px;
     font-weight:700;
@@ -207,7 +259,7 @@
   }
 
   .q-card{
-    background:white;
+    background:var(--bg);
     border:1.5px solid var(--border);
     border-radius:var(--radius-lg);
     padding:30px;
@@ -231,7 +283,7 @@
     padding:14px 16px;
     cursor:pointer;
     transition:all .18s ease;
-    background:white;
+    background:var(--bg);
   }
   .option:hover:not(.locked){border-color:var(--accent); background:var(--accent-soft);}
   .option .letter{
@@ -242,7 +294,7 @@
     font-weight:700;font-size:13.5px;color:var(--ink-soft);
     transition:all .18s ease;
   }
-  .option .text{font-size:15px;line-height:1.45;color:var(--ink);padding-top:3px;}
+  .option .text{font-size:15px;line-height:1.45;color:var(--ink);padding-top:3px; white-space: pre-wrap;}
   .option.chosen{border-color:var(--accent); background:var(--accent-soft);}
   .option.chosen .letter{background:var(--accent); color:white;}
   .option.locked{cursor:default;}
@@ -280,7 +332,7 @@
   .result-hero{
     text-align:center;
     padding:36px 24px 30px;
-    background:linear-gradient(180deg, var(--accent-soft), white);
+    background:linear-gradient(180deg, var(--accent-soft), var(--bg));
     border-radius:var(--radius-lg);
     border:1.5px solid var(--border);
     margin-bottom:24px;
@@ -296,7 +348,7 @@
   .result-msg{font-size:17px; font-weight:700; color:var(--ink); margin:6px 0 4px;}
   .result-sub{font-size:14px; color:var(--ink-soft); margin:0;}
   .stat-row{display:flex; gap:12px; margin-top:18px;}
-  .stat-box{flex:1; background:white; border:1.5px solid var(--border); border-radius:var(--radius-sm); padding:14px; text-align:center;}
+  .stat-box{flex:1; background:var(--bg); border:1.5px solid var(--border); border-radius:var(--radius-sm); padding:14px; text-align:center;}
   .stat-box .v{font-size:22px;font-weight:800; font-family:'Plus Jakarta Sans', sans-serif;}
   .stat-box .k{font-size:12px;color:var(--ink-faint); font-weight:600; margin-top:2px;}
   .stat-box.good .v{color:var(--green);}
@@ -314,7 +366,7 @@
   .mistakes-sub{font-size:13.5px; color:var(--ink-soft); margin-bottom:16px;}
   .mistake-card{
     border:1.5px solid var(--border); border-radius:var(--radius-md);
-    padding:18px 20px; margin-bottom:12px; background:white;
+    padding:18px 20px; margin-bottom:12px; background:var(--bg);
   }
   .mistake-card .mq{font-size:14.5px; font-weight:700; color:var(--ink); margin-bottom:10px; line-height:1.4;}
   .mistake-line{font-size:13.5px; margin-bottom:5px; line-height:1.5;}
@@ -349,7 +401,7 @@
   /* ---------- study screen ---------- */
   .study-head{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:18px; flex-wrap:wrap;}
   .back-link{
-    border:1.5px solid var(--border); background:white; color:var(--ink);
+    border:1.5px solid var(--border); background:var(--bg); color:var(--ink);
     font-weight:700; font-size:13.5px; font-family:'Plus Jakarta Sans', sans-serif;
     padding:9px 14px; border-radius:10px; cursor:pointer; transition:all .18s ease;
   }
@@ -362,7 +414,7 @@
   }
   details.details-variant{
     border:1.5px solid var(--border); border-radius:var(--radius-md);
-    margin-bottom:14px; overflow:hidden; background:white;
+    margin-bottom:14px; overflow:hidden; background:var(--bg);
   }
   details.details-variant summary{
     list-style:none; cursor:pointer; padding:16px 18px;
@@ -389,14 +441,14 @@
   .study-options{display:flex; flex-direction:column; gap:6px; margin-bottom:10px;}
   .study-option{
     display:flex; align-items:center; gap:10px; padding:8px 10px;
-    border-radius:9px; font-size:13.5px; background:white; border:1px solid var(--border);
+    border-radius:9px; font-size:13.5px; background:var(--bg); border:1px solid var(--border);
   }
   .study-option .letter{
     width:22px;height:22px;border-radius:7px;background:var(--bg-soft);
     display:flex;align-items:center;justify-content:center;
     font-size:11.5px;font-weight:700;color:var(--ink-soft); flex-shrink:0;
   }
-  .study-option .text{color:var(--ink); line-height:1.4;}
+  .study-option .text{color:var(--ink); line-height:1.4; white-space: pre-wrap;}
   .study-option.correct{border-color:var(--green-border); background:var(--green-bg);}
   .study-option.correct .letter{background:var(--green); color:white;}
   .study-option .check{margin-left:auto; color:var(--green); font-weight:800; flex-shrink:0;}
@@ -425,14 +477,6 @@
     .brand-text strong{font-size:13.5px;}
     .stat-row{flex-direction:column;}
   }
-  @media (min-width:521px) and (max-width:720px){
-    .shell{padding:28px 24px 60px;}
-  }
-
-  button:focus-visible, .option:focus-visible, .set-card:focus-visible,
-  details.details-variant summary:focus-visible, .back-link:focus-visible, .ghost-btn:focus-visible{
-    outline:2.5px solid var(--accent); outline-offset:2px;
-  }
 </style>
 </head>
 <body>
@@ -446,10 +490,12 @@
         <span>КМ 03 · Веб-дизайнер</span>
       </div>
     </div>
-    <div class="badge-kicker" id="topBadge">СТАРТ</div>
+    <div class="top-actions">
+      <button class="theme-toggle" id="themeToggleBtn">🌓 <span>Күндізгі</span></button>
+      <div class="badge-kicker" id="topBadge">СТАРТ</div>
+    </div>
   </div>
 
-  <!-- START SCREEN -->
   <section class="screen active" id="screen-start">
     <div class="hero">
       <h1>Тренажёр по экзамену</h1>
@@ -470,7 +516,6 @@
     <button class="primary-btn" id="startBtn" disabled>Начать тест</button>
   </section>
 
-  <!-- STUDY / CABINET SCREEN -->
   <section class="screen" id="screen-study">
     <div class="study-head">
       <button class="back-link" id="backFromStudyBtn">← Назад</button>
@@ -487,7 +532,6 @@
     <button class="secondary-btn" id="toQuizFromStudyBtn">Перейти к тренировке</button>
   </section>
 
-  <!-- QUIZ SCREEN -->
   <section class="screen" id="screen-quiz">
     <div class="progress-wrap">
       <div class="progress-top">
@@ -508,7 +552,6 @@
     </div>
   </section>
 
-  <!-- RESULT SCREEN -->
   <section class="screen" id="screen-result">
     <div class="result-hero">
       <div class="gauge-wrap">
@@ -539,290 +582,542 @@
 </div>
 
 <script>
-const QUESTIONS = [{"variant": 1, "num": 1, "question": "Figma-да өзара байланысқан элементтердің динамикалық өзгеруін қамтамасыз ететін функция:", "options": {"A": "Layout Grid", "B": "Auto Layout", "C": "Smart Animate", "D": "Component Library"}, "correct": "B", "explanation": "Auto Layout контейнер мен оның ішіндегі элементтердің өлшемін бір-біріне байланысты автоматты түрде өзгертіп отырады."}, {"variant": 1, "num": 2, "question": "Figma интерфейсіндегі \"Canvas\" дегеніміз не?", "options": {"A": "Жобаның барлық элементтері мен фреймдері орналасатын шексіз жұмыс кеңістігі", "B": "Дайын макеттерді кодқа айналдыратын панель", "C": "Тек қаріптер мен түстерді реттейтін құрал", "D": "Сол жақтағы қабаттар (Layers) тізімі"}, "correct": "A", "explanation": "Canvas — фреймдер мен элементтер орналастырылатын шексіз жұмыс аймағы."}, {"variant": 1, "num": 3, "question": "Figma-да Мастер-компоненттің көшірмесі қалай аталады?", "options": {"A": "Variant", "B": "Main Component", "C": "Instance (Экземпляр)", "D": "Frame"}, "correct": "C", "explanation": "Instance — мастер-компоненттен жасалған көшірме, ол мастермен байланыста қалады."}, {"variant": 1, "num": 4, "question": "Прототиптеу кезінде нысанның бастапқы және соңғы күйін автоматты түрде танып, тегіс ауысуды жасайтын функция:", "options": {"A": "Dissolve", "B": "On Click", "C": "Smart Animate", "D": "Move In"}, "correct": "C", "explanation": "Smart Animate екі экрандағы бірдей атаулы қабаттардың арасында тегіс анимация жасайды."}, {"variant": 1, "num": 5, "question": "Figma-дағы \"Dev Mode\" режимінің негізгі мақсаты қандай?", "options": {"A": "Векторлық иллюстрациялар салу", "B": "Әзірлеушілерге (девелоперлерге) дизайн кодтарын, өлшемдер мен токендерді ыңғайлы көруге жағдай жасау", "C": "Интерактивті прототипті іске қосу", "D": "Мәтіннің грамматикасын тексеру"}, "correct": "B", "explanation": "Dev Mode дизайнды кодқа айналдыру кезінде CSS мәндерін, өлшемдер мен токендерді көрсетеді."}, {"variant": 1, "num": 6, "question": "Пайдаланушы интерфейсінің қолжетімділігін (Accessibility) анықтайтын POUR принциптерінің бірінші әрпі («P») нені білдіреді?", "options": {"A": "Perceivable (Қабылданатын)", "B": "Predictable (Болжанатын)", "C": "Robust (Тұрақты)", "D": "Processable (Өңделетін)"}, "correct": "A", "explanation": "POUR принципінің бірінші әрпі — Perceivable, яғни ақпарат пайдаланушыға қабылданатын түрде ұсынылуы тиіс."}, {"variant": 1, "num": 7, "question": "Figma-да бірнеше батырма күйлерін (Default, Hover, Disabled) бір компонент ішінде топтастыру үшін қандай құрал қолданылады?", "options": {"A": "Layout Grid", "B": "Variants", "C": "Overlay", "D": "Device Frame"}, "correct": "B", "explanation": "Variants компоненттің бірнеше күйін бір топ ішінде басқаруға мүмкіндік береді."}, {"variant": 1, "num": 8, "question": "Прототип параметрлеріндегі \"Overlay\" (модалды терезе үшін) функциясының қызметі қандай?", "options": {"A": "Экранды толығымен жаңа бетке ауыстыру", "B": "Ағымдағы беттің үстінен жаңа кішігірім терезені (қалқымалы) ашу", "C": "Дизайнды баспаға дайындау", "D": "Суреттердің түсін өзгерту"}, "correct": "B", "explanation": "Overlay ағымдағы экранды жаппай, оның үстінен қалқымалы терезе ашады."}, {"variant": 1, "num": 9, "question": "Tilda платформасындағы \"Zero Block\" дегеніміз не?", "options": {"A": "Дайын стандартты блоктар жиынтығы", "B": "Дизайнерге элементтерді еркін орналастыруға мүмкіндік беретін нөлден бастап жасалатын бос бағдарламалаусыз блок", "C": "Тек қателерді тексеретін техникалық блок", "D": "Сайттың жертөлесі (Footer)"}, "correct": "B", "explanation": "Zero Block — Tilda-да кодсыз еркін дизайн құруға арналған құрал."}, {"variant": 1, "num": 10, "question": "Tilda-да сайттың іздеу жүйелерінде жоғары деңгейде көрінуін қамтамасыз ететін оңтайландыру процесі:", "options": {"A": "UX Design", "B": "SEO (Search Engine Optimization)", "C": "Responsive Web Design", "D": "Handoff"}, "correct": "B", "explanation": "SEO — сайтты іздеу жүйелерінде жоғары орынға шығаруға бағытталған оңтайландыру."}, {"variant": 1, "num": 11, "question": "Веб-дизайндағы Юзабилити (UX) принциптері неге бағытталған?", "options": {"A": "Сайттың тек түстік гаммасын сәнді етуге", "B": "Пайдаланушының сайтты барынша ыңғайлы, түсінікті және кедергісіз қолдануына", "C": "Сайтқа үлкен көлемді видеолар жүктеуге", "D": "Бағдарламалау кодын қысқартуға"}, "correct": "B", "explanation": "UX принциптері пайдаланушы тәжірибесінің ыңғайлылығы мен түсініктілігіне бағытталған."}, {"variant": 1, "num": 12, "question": "Төмендегілердің қайсысы семантикалық HTML тегіне жатады және сайттың құрылымын іздеу роботтарына түсінікті етеді?", "options": {"A": "<div>", "B": "<span>", "C": "<article>", "D": "<b>"}, "correct": "C", "explanation": "<article> мазмұнның логикалық бөлігін білдіретін семантикалық тег, ал div/span семантикасыз."}, {"variant": 1, "num": 13, "question": "Tilda-да пайдаланушылардан деректер жинау үшін міндетті түрде қандай элемент қолданылады?", "options": {"A": "Карусель (Slider)", "B": "Форма (Form) және батырма (Button)", "C": "Аккордеон (Accordion)", "D": "Меню (Navigation menu)"}, "correct": "B", "explanation": "Деректерді жинау үшін Form элементі міндетті, ал Button оны жіберуге қажет."}, {"variant": 1, "num": 14, "question": "Adobe InDesign бағдарламасы негізінен қандай мақсатта қолданылады?", "options": {"A": "3D модельдеу және анимация жасау", "B": "Көпбетті басылымдарды (кітап, журнал, брендбук, портфолио) беттеу және баспаға дайындау", "C": "Күрделі бейнебаяндарды монтаждау", "D": "Векторлық логотиптерді нөлден салу"}, "correct": "B", "explanation": "InDesign кітап, журнал, брендбук сияқты көпбетті материалдарды беттеуге арналған."}, {"variant": 1, "num": 15, "question": "InDesign-да барлық беттерде қайталанатын элементтерді автоматты түрде орналастыру үшін қолданылатын шаблон бет қалай аталады?", "options": {"A": "Document Setup", "B": "Master Page (Мастер-бет)", "C": "Swatches Panel", "D": "Character Style"}, "correct": "B", "explanation": "Master Page барлық беттерде қайталанатын элементтерді (логотип, нөмір) автоматты орналастырады."}, {"variant": 1, "num": 16, "question": "InDesign-да мәтіннің тек жекелеген сөздеріне немесе әріптеріне қолданылатын стиль түрі:", "options": {"A": "Paragraph Style", "B": "Character Style (Таңбалық стиль)", "C": "Object Style", "D": "Table Style"}, "correct": "B", "explanation": "Character Style жеке сөздер немесе әріптерге қолданылатын стиль түрі."}, {"variant": 1, "num": 17, "question": "InDesign-да баспаға жібермес бұрын құжаттағы қателерді автоматты тексеретін функция:", "options": {"A": "Preflight (Макетті тексеру)", "B": "Package", "C": "Export", "D": "Hyperlinks"}, "correct": "A", "explanation": "Preflight құжаттағы баспаға кедергі болатын қателерді алдын ала тексереді."}, {"variant": 1, "num": 18, "question": "Баспа өнімдерін дайындау кезінде (полиграфияда) қолданылатын негізгі түс моделі:", "options": {"A": "RGB", "B": "CMYK", "C": "HEX", "D": "HSL"}, "correct": "B", "explanation": "Баспа өнімдеріне арналған негізгі түс моделі — CMYK."}, {"variant": 1, "num": 19, "question": "InDesign-да суреттер мен графикалардың компьютердегі мекенжайына сілтеме жасап тұратын панелі:", "options": {"A": "Layers", "B": "Swatches", "C": "Links", "D": "Pages"}, "correct": "C", "explanation": "Links панелі құжатқа орналастырылған суреттердің көзіне сілтеме жасап тұрады."}, {"variant": 1, "num": 20, "question": "Figma-да жобаны әзірлеушіге тапсыру (Handoff) алдында түстер мен қаріптерді жүйелеу үшін жасалатын ортақ атаулар мен мәндер жиынтығы:", "options": {"A": "Design Tokens", "B": "Smart Animate", "C": "Layout Grid", "D": "Component Instance"}, "correct": "A", "explanation": "Design Tokens — түстер мен қаріптерді кодпен сәйкестіруге арналған ортақ мәндер жүйесі."}, {"variant": 1, "num": 21, "question": "Tilda-да аккордеондар мен табтар (tabs) не үшін қолданылады?", "options": {"A": "Сайттың жылдамдығын арттыру үшін", "B": "Ақпаратты ықшамдап, пайдаланушы басқанда ғана ашылатындай етіп интерактивті орналастыру үшін", "C": "Жаңа домен сатып алу үшін", "D": "SEO параметрлерін толтыру үшін"}, "correct": "B", "explanation": "Аккордеон мен табтар үлкен ақпаратты ықшамдап, тек қажет кезде ашылатындай етіп көрсетеді."}, {"variant": 1, "num": 22, "question": "Веб-дизайндағы «Ақпараттық архитектура» дегеніміз не?", "options": {"A": "Сайттың серверде сақталу көлемі", "B": "Сайттағы контенттің логикалық құрылымы, пайдаланушыға түсінікті навигациясы мен иерархиясы", "C": "Тек суреттердің сапасы", "D": "HTML кодын жазу стилі"}, "correct": "B", "explanation": "Ақпараттық архитектура — контенттің логикалық құрылымы мен навигация иерархиясы."}, {"variant": 1, "num": 23, "question": "Adobe InDesign бағдарламасында \"Overset text\" (сыймай қалған мәтін) белгісі қандай түспен көрінеді?", "options": {"A": "Жасыл дөңгелек", "B": "Көк үшбұрыш", "C": "Қызыл плюс (+) белгісі бар шаршы", "D": "Сары леп белгісі"}, "correct": "C", "explanation": "Overset text белгісі — мәтіндік фреймнің бұрышындағы қызыл плюс белгісі бар шаршы."}, {"variant": 1, "num": 24, "question": "Көп бетті құжатты баспаханаға толық файлдарымен, қолданылған қаріптерімен және суреттерімен бір папкаға жинақтап өткізу процесі:", "options": {"A": "Preflight", "B": "Package (Бумалау)", "C": "Liquid Layout", "D": "Content Collector"}, "correct": "B", "explanation": "Package барлық қажетті файлдарды (қаріп, сурет) бір папкаға жинайды."}, {"variant": 1, "num": 25, "question": "Figma-да прототипті мобильді құрылғының экраны сияқты етіп көрсету үшін қолданылатын параметр:", "options": {"A": "Device Frame", "B": "Background Color", "C": "Canvas Size", "D": "Constraints"}, "correct": "A", "explanation": "Device Frame прототипті нақты құрылғы экраны түрінде көрсетуге мүмкіндік береді."}, {"variant": 2, "num": 1, "question": "Figma-да \"Layers\" (Қабаттар) панелі интерфейстің қай бөлігінде орналасқан?", "options": {"A": "Оң жақ панельде", "B": "Жоғарғы құралдар панелінде", "C": "Сол жақ панельде", "D": "Төменгі бөлікте"}, "correct": "C", "explanation": "Layers панелі әдетте интерфейстің сол жағында орналасады."}, {"variant": 2, "num": 2, "question": "Төмендегі өлшемдердің қайсысы заманауи стандартты Mobile (Мобильді) экран фреймінің еніне сәйкес келеді?", "options": {"A": "1920 px", "B": "393 px (мысалы, iPhone 14/15)", "C": "1440 px", "D": "1024 px"}, "correct": "B", "explanation": "393px — заманауи смартфондардың (мысалы iPhone 14/15) стандартты ені."}, {"variant": 2, "num": 3, "question": "Auto Layout қолданылған контейнерде элементтердің арасындағы қашықтықты реттейтін параметр:", "options": {"A": "Padding", "B": "Gap (Spacing between items)", "C": "Alignment", "D": "Constraints"}, "correct": "B", "explanation": "Gap элементтер арасындағы қашықтықты, ал Padding контейнердің ішкі шегінісін реттейді."}, {"variant": 2, "num": 4, "question": "Мастер-компонентке (Main Component) өзгеріс енгізгенде не болады?", "options": {"A": "Оның барлық экземплярлары (көшірмелері) автоматты түрде өзгереді", "B": "Экземплярлар жойылып кетеді", "C": "Тек таңдалған бір көшірме өзгереді", "D": "Ештеңе өзгермейді"}, "correct": "A", "explanation": "Мастер-компоненттегі өзгеріс барлық оның instance көшірмелеріне автоматты тарайды."}, {"variant": 2, "num": 5, "question": "Пайдаланушы элементтің үстіне тышқан меңзерін апарғанда іске қосылатын прототип өзара әрекеттесуі:", "options": {"A": "On Click", "B": "While Hovering", "C": "On Drag", "D": "After Delay"}, "correct": "B", "explanation": "While Hovering меңзер элемент үстінде тұрғанда іске қосылады."}, {"variant": 2, "num": 6, "question": "Figma-да \"Starting Point\" деген не?", "options": {"A": "Компонентті өшіру нүктесі", "B": "Прототипті Play режимінде қосқанда анимацияның басталатын алғашқы экраны", "C": "Түстер палитрасының басы", "D": "Векторлық нүктенің атауы"}, "correct": "B", "explanation": "Starting Point — прототипті іске қосқанда көрсетілетін бастапқы экран."}, {"variant": 2, "num": 7, "question": "Өту анимациясының (Transition) қай түрі ескі экранның біртіндеп жоғалып, жаңа экранның анықтала бастауын білдіреді?", "options": {"A": "Smart Animate", "B": "Dissolve (Еру)", "C": "Move In", "D": "Push"}, "correct": "B", "explanation": "Dissolve бір экранды біртіндеп жоғалтып, екіншісін біртіндеп пайда қылады."}, {"variant": 2, "num": 8, "question": "Figma-да дайын компоненттерді басқа файлдарда ортақ қолдану үшін қайда жариялаймыз (Publish)?", "options": {"A": "Dev Mode", "B": "Component Library (Компоненттер кітапханасы)", "C": "Layout Grid", "D": "Page Layer"}, "correct": "B", "explanation": "Component Library компоненттерді басқа файлдарда ортақ қолдануға арналған."}, {"variant": 2, "num": 9, "question": "Түстер мен қаріптерді код деңгейінде басқару үшін Figma-да қолданылатын айнымалылар (variables) жүйесі қалай аталады?", "options": {"A": "Style Overrides", "B": "Design Tokens", "C": "Constraints", "D": "Auto Layout"}, "correct": "B", "explanation": "Design Tokens түстер мен қаріптерді код деңгейінде басқаратын айнымалылар жүйесі."}, {"variant": 2, "num": 10, "question": "Tilda-да дайын құрылымдық блоктарды (Мұқаба, Пікірлер, Контактілер) қамтитын кітапхана қалай аталады?", "options": {"A": "Zero Block", "B": "Стандартты блоктар (Standard Blocks)", "C": "CSS editor", "D": "API Integration"}, "correct": "B", "explanation": "Стандартты блоктар кітапханасында дайын құрылымдық блоктар жинағы бар."}, {"variant": 2, "num": 11, "question": "Веб-дизайндағы «Адаптивті верстка» (Responsive Design) деген не?", "options": {"A": "Сайттың тек дербес компьютерде (desktop) әдемі көрінуі", "B": "Сайттың кез келген құрылғы экранына (мобильді, планшет, компьютер) автоматты түрде бейімделіп, дұрыс ашылуы", "C": "Сайттың жылдам жүктелуі", "D": "Суреттердің форматын өзгерту"}, "correct": "B", "explanation": "Адаптивті верстка сайттың кез келген құрылғы экранына автоматты бейімделуін қамтамасыз етеді."}, {"variant": 2, "num": 12, "question": "Веб-дизайн контекстіндегі «Бренд визуалды идентичтігі» деген не?", "options": {"A": "Сайттың кодының қауіпсіздігі", "B": "Компанияның танымалдылығын арттыратын логотип, бірыңғай түстер мен қаріптер жүйесі", "C": "Іздеу жүйелерінің алгоритмі", "D": "Домендік атау"}, "correct": "B", "explanation": "Бренд визуалды идентичтігі логотип, түс және қаріп жүйесінен тұратын бірыңғай стиль."}, {"variant": 2, "num": 13, "question": "Tilda платформасында сайтқа сыртқы сервистерді (мысалы, Google Analytics) бағдарламалаусыз қосу қай бөлімде жүзеге асады?", "options": {"A": "Zero Block ішінде", "B": "Сайт баптауларында (Site Settings > Analytics)", "C": "Layers панелінде", "D": "Тек код жазу арқылы"}, "correct": "B", "explanation": "Сыртқы сервистер Site Settings > Analytics бөлімінде кодсыз қосылады."}, {"variant": 2, "num": 14, "question": "InDesign бағдарламасында бағыттаушы сызықтар мен торларды (Grids and Guides) жасаудың негізгі мақсаты:", "options": {"A": "Элементтерді бет бетінде дәл, тегіс және жүйелі орналастыру (модульдік тор құру)", "B": "Суреттердің өлшемін үлкейту", "C": "Құжаттың көлемін кішірейту", "D": "Түстерді түзету"}, "correct": "A", "explanation": "Grids and Guides элементтерді дәл әрі жүйелі орналастыруға көмектеседі."}, {"variant": 2, "num": 15, "question": "InDesign-да тұтас бір абзацқа бірден қолданылатын стиль түрі:", "options": {"A": "Character Style", "B": "Paragraph Style (Абзацтық стиль)", "C": "Object Style", "D": "Cell Style"}, "correct": "B", "explanation": "Paragraph Style бір абзацтың барлық мәтініне бірден қолданылады."}, {"variant": 2, "num": 16, "question": "InDesign-да мәтіндік фреймнің ішіне сурет қою үшін қандай команда қолданылады?", "options": {"A": "File > Place (Орналастыру)", "B": "Edit > Paste Special", "C": "Object > Fitting", "D": "File > New"}, "correct": "A", "explanation": "File > Place командасы арқылы сыртқы сурет құжатқа орналастырылады."}, {"variant": 2, "num": 17, "question": "Экрандық құрылғылар мен цифрлық жарияланымдарға арналған негізгі түс моделі:", "options": {"A": "CMYK", "B": "RGB", "C": "Pantone", "D": "LAB"}, "correct": "B", "explanation": "Экрандарда түс RGB моделімен қалыптастырылады."}, {"variant": 2, "num": 18, "question": "InDesign-да \"Nested Styles\" (Ішінара стильдер) функциясы не үшін қажет?", "options": {"A": "Суреттерді топтастыру үшін", "B": "Абзацтық стильдің ішінде белгілі бір ереже бойынша таңбалық стильді (Character Style) автоматты түрде іске қосу үшін", "C": "Жаңа бет қосу үшін", "D": "Құжатты PDF форматына экспорттау үшін"}, "correct": "B", "explanation": "Nested Styles абзац ішінде шартқа сай таңбалық стильді автоматты қосады."}, {"variant": 2, "num": 19, "question": "Төмендегілердің қайсысы InDesign бағдарламасындағы кескінді мәтінмен қоршау функциясы?", "options": {"A": "Text Wrap", "B": "Clipping Path", "C": "Story Editor", "D": "Corner Options"}, "correct": "A", "explanation": "Text Wrap мәтінді суреттің айналасына орап шығаруға арналған."}, {"variant": 2, "num": 20, "question": "InDesign-да жасалған интерактивті портфолионы сілтеме арқылы тікелей интернетте бөлісуге мүмкіндік беретін Adobe функциясы:", "options": {"A": "Export to Interactive PDF", "B": "Publish Online", "C": "Package document", "D": "Preflight panel"}, "correct": "B", "explanation": "Publish Online құжатты сілтеме арқылы интернетте жариялауға мүмкіндік береді."}, {"variant": 2, "num": 21, "question": "Пайдаланушы интерфейсіндегі «Карусель» (Slider) компонентінің қызметі:", "options": {"A": "Мәтінді толығымен жасыру", "B": "Бір орында бірнеше суретті немесе баннерді кезекпен жылжытып көрсету", "C": "Сайтты қорғау", "D": "Форма деректерін серверге жіберу"}, "correct": "B", "explanation": "Карусель бір блок ішінде бірнеше суретті кезекпен ауыстырып көрсетеді."}, {"variant": 2, "num": 22, "question": "Қолжетімділік (Accessibility) бойынша POUR принциптеріндегі \"Understandable\" (Түсінікті) принципі нені талап етеді?", "options": {"A": "Сайттың коды таза болуын", "B": "Интерфейс мәтіні мен операциялары пайдаланушыға түсінікті, болжамды болуын", "C": "Тек дыбыстық сүйемелдеудің болуын", "D": "Түстердің өте ашық болуын"}, "correct": "B", "explanation": "Understandable принципі интерфейстің мәтіні мен әрекеттерінің түсінікті болуын талап етеді."}, {"variant": 2, "num": 23, "question": "Figma-да ұзын беттерді (мысалы, Лендинг) төмен қарай айналдыру мүмкіндігін тестілеу үшін Прототип мінез-құлқы (Scroll behavior) қалай бапталады?", "options": {"A": "No scrolling", "B": "Vertical scrolling", "C": "Horizontal scrolling", "D": "Both directions"}, "correct": "B", "explanation": "Vertical scrolling беттің тігінен төмен айналдырылуын мүмкін етеді."}, {"variant": 2, "num": 24, "question": "Көшірілген батырманың (Instance) түсін Мастер-компонентке әсер етпей өзгерту процесі қалай аталады?", "options": {"A": "Reset Instance", "B": "Override (Қайта анықтау/Өзгерту)", "C": "Detach Instance", "D": "Component Creation"}, "correct": "B", "explanation": "Override арқылы instance мастерге әсер етпей жеке өзгертіледі."}, {"variant": 2, "num": 25, "question": "Tilda-да сайтты іздеу жүйелерінде оңтайландыру (SEO) үшін әр беттің баптауында толтырылатын маңызды мета-тегтер:", "options": {"A": "HTML және CSS кодары", "B": "Title (Тақырып) және Description (Сипаттама)", "C": "Тек сурет атаулары", "D": "API кілттері"}, "correct": "B", "explanation": "SEO үшін негізгі мета-тегтер — Title және Description."}, {"variant": 3, "num": 1, "question": "Figma құралдар панеліндегі \"Frame\" құралын жылдам шақыру пернесі (hotkey):", "options": {"A": "V", "B": "F", "C": "T", "D": "R"}, "correct": "B", "explanation": "Frame құралын жылдам шақыру үшін \"F\" пернесі қолданылады."}, {"variant": 3, "num": 2, "question": "Figma-да элементтерді тор көздері бойынша дәл орналастыру және пропорцияны сақтау үшін қолданылатын тор жүйесі:", "options": {"A": "Layout Grid", "B": "Auto Layout", "C": "Smart Animate", "D": "Vector Networks"}, "correct": "A", "explanation": "Layout Grid элементтерді тор көздері бойынша дәл орналастыруға көмектеседі."}, {"variant": 3, "num": 3, "question": "Төмендегілердің қайсысы Auto Layout баптауына жатпайды?", "options": {"A": "Direction (Тігінен/Көлденеңнен)", "B": "Padding (Ішкі шегіністер)", "C": "Dissolve (Еру)", "D": "Gap (Элементтер арасы)"}, "correct": "C", "explanation": "Dissolve — анимация түрі, ол Auto Layout баптауына жатпайды."}, {"variant": 3, "num": 4, "question": "Figma-да Мастер-компонент құру үшін басылатын пиктограмма (белгіше):", "options": {"A": "Үшбұрыш", "B": "Бір біріне біріккен 4 ромб (❖)", "C": "Қарапайым шаршы", "D": "Шеңбер"}, "correct": "B", "explanation": "Мастер-компонент белгішесі — төрт ромбтан тұратын ❖ пиктограммасы."}, {"variant": 3, "num": 5, "question": "Прототиптеуде \"On Click\" өзара әрекеттесуі нені білдіреді?", "options": {"A": "Элементтің үстіне тышқанды жай ғана апарғанда іске қосылу", "B": "Элементті тышқанмен шерткенде (басқанда) іске қосылу", "C": "Бетті төмен қарай айналдырғанда іске қосылу", "D": "Белгілі бір уақыттан кейін автоматты өту"}, "correct": "B", "explanation": "On Click элементті тышқанмен бассаны іске қосылады."}, {"variant": 3, "num": 6, "question": "Figma прототипін тексеруге арналған \"Play\" (Алдын ала қарау) батырмасы интерфейстің қай бұрышында орналасқан?", "options": {"A": "Төменгі сол жақ", "B": "Жоғарғы оң жақ", "C": "Сол жақ ортада", "D": "Төменгі оң жақ"}, "correct": "B", "explanation": "Play батырмасы интерфейстің жоғарғы оң жақ бұрышында орналасады."}, {"variant": 3, "num": 7, "question": "\"Dissolve\" өтпелі анимация түрі элементтерді қалай ауыстырады?", "options": {"A": "Бір экранды екінші экран ысырып шығарады", "B": "Бір экран біртіндеп еріп жоғалады, екіншісі біртіндеп пайда болады", "C": "Элементтер жоғарыдан төмен қарай құлайды", "D": "Экрандар бірден ешқандай эффектсіз ауысады"}, "correct": "B", "explanation": "Dissolve кезінде бір экран еріп жоғалады, екіншісі біртіндеп пайда болады."}, {"variant": 3, "num": 8, "question": "Figma-да дизайн элементтерінің (түстер, шрифтер) CSS/жасаушы кодтарына бейімделген атаулары:", "options": {"A": "Layout Styles", "B": "Design Tokens", "C": "Constraints", "D": "Vector Nodes"}, "correct": "B", "explanation": "Design Tokens дизайн элементтерінің кодпен сәйкестірілген атаулары."}, {"variant": 3, "num": 9, "question": "Tilda-да \"Zero Block\" ішінде жасалатын адаптивтіліктің (Breakpoints) негізгі мақсаты:", "options": {"A": "Сайттың түсін өзгерту", "B": "Әртүрлі экран еніне (1200px, 960px, 640px, 480px, 320px) сай дизайнды жеке-жеке ыңғайлап реттеу", "C": "Жаңа беттерді автоматты түрде қосу", "D": "Сайт кодын толық өшіру"}, "correct": "B", "explanation": "Breakpoints әртүрлі экран еніне сай дизайнды жеке-жеке реттеуге арналған."}, {"variant": 3, "num": 10, "question": "Фронтенд технологияларының негізі болып табылатын HTML мен CSS-тің айырмашылығы неде?", "options": {"A": "HTML – сайттың мазмұны мен құрылымы, CSS – оның визуалды стилі мен безендірілуі", "B": "CSS – сайттың құрылымы, HTML – стильдері", "C": "Екеуі де тек мәтін жазуға арналған", "D": "HTML бағдарламалау тілі, CSS іздеу жүйесі"}, "correct": "A", "explanation": "HTML мазмұн мен құрылымды, CSS визуалды стиль мен безендіруді анықтайды."}, {"variant": 3, "num": 11, "question": "Дизайнды әзірлеушілерге тапсыру (Handoff) процесінде Figma-ның қай режимі маңызды рөл атқарады?", "options": {"A": "Design Mode", "B": "Dev Mode", "C": "Prototype Mode", "D": "Jam Mode"}, "correct": "B", "explanation": "Dev Mode handoff процесінде дизайн кодтары мен өлшемдерді көрсетеді."}, {"variant": 3, "num": 12, "question": "Навигациялық мәзірдегі «Нүктелік индикаторлар» (Dot indicators) не үшін қажет?", "options": {"A": "Сайттың қатесін көрсету үшін", "B": "Карусельде немесе онбордингте пайдаланушының қазір нешінші бетте/слайдта тұрғанын визуалды көрсету үшін", "C": "Жаңа терезе ашу үшін", "D": "Түстерді таңдау үшін"}, "correct": "B", "explanation": "Нүктелік индикаторлар пайдаланушыға ағымдағы слайд орнын көрсетеді."}, {"variant": 3, "num": 13, "question": "Tilda-да жасалған сайтты интернетте қолжетімді ету үшін жасалатын соңғы міндетті қадам:", "options": {"A": "Жариялау (Publish) батырмасын басу", "B": "Блокты өшіру", "C": "Тек Figma-ға экспорттау", "D": "Жаңа сурет жүктеу"}, "correct": "A", "explanation": "Сайтты интернетте қолжетімді ету үшін Publish батырмасын басу қажет."}, {"variant": 3, "num": 14, "question": "Adobe InDesign бағдарламасында жаңа құжат ашқанда (New Document) \"Facing Pages\" баптауы не үшін жауап береді?", "options": {"A": "Беттердің тек тігінен орналасуына", "B": "Кітап немесе журнал сияқты беттердің жұппен (жайма бет – разворот) орналасуына", "C": "Құжатты бір беттік қана етуге", "D": "Суреттердің сапасын арттыруға"}, "correct": "B", "explanation": "Facing Pages беттердің кітап/журнал сияқты жұппен (разворот) орналасуын қамтамасыз етеді."}, {"variant": 3, "num": 15, "question": "InDesign бағдарламасында мәтін орналасатын арнайы контейнер қалай аталады?", "options": {"A": "Rectangle Frame", "B": "Text Frame (Мәтіндік фрейм)", "C": "Text Box", "D": "Shape Layer"}, "correct": "B", "explanation": "Мәтін InDesign-да Text Frame контейнерінде орналасады."}, {"variant": 3, "num": 16, "question": "InDesign-да \"Swatches\" панелінің негізгі қызметі:", "options": {"A": "Қаріптердің тізімін сақтау", "B": "Құжатта қолданылатын дайын түстер палитрасын сақтау және басқару", "C": "Беттердің нөмірлерін реттеу", "D": "Сілтемелерді тексеру"}, "correct": "B", "explanation": "Swatches панелі құжаттың түстер палитрасын сақтап, басқарады."}, {"variant": 3, "num": 17, "question": "InDesign-да мәтіннің ішінен белгілі бір сөздерді автоматты іздеп тауып, оларға стиль қолдануға мүмкіндік беретін күрделі құрал:", "options": {"A": "Hyphenation", "B": "GREP (тұрақты тіркестер)", "C": "Text Wrap", "D": "Story Editor"}, "correct": "B", "explanation": "GREP тұрақты тіркестер арқылы мәтінді автоматты іздеп стиль қолдануға мүмкіндік береді."}, {"variant": 3, "num": 18, "question": "InDesign-да \"Object Style\" (Нысан стилі) не үшін қолданылады?", "options": {"A": "Тек мәтіннің қаріпін өзгерту үшін", "B": "Графикалық фреймдердің, шаршылардың жиектерін, түстерін, эффектілерін бір стандартқа келтіріп, стиль ретінде сақтау үшін", "C": "Жаңа құжат жасау үшін", "D": "Беттерді жою үшін"}, "correct": "B", "explanation": "Object Style графикалық нысандардың рәсімделуін стандарттауға арналған."}, {"variant": 3, "num": 19, "question": "Құжатты баспаханаға сапалы өткізу үшін InDesign-да экспортталатын негізгі формат:", "options": {"A": "Adobe PDF (Print)", "B": "JPEG (Low)", "C": "EPUB", "D": "HTML"}, "correct": "A", "explanation": "Баспаханаға арналған негізгі экспорт форматы — Adobe PDF (Print)."}, {"variant": 3, "num": 20, "question": "Пайдаланушы интерфейсінде енгізу өрісіне (Input field) қате ақпарат жазылғанда, дизайн ережесі бойынша өріс қалай өзгеруі керек?", "options": {"A": "Жасыл жиекпен белгіленуі тиіс", "B": "Жиегі қызыл түске боялып, астынан қате туралы ескерту мәтіні шығуы тиіс", "C": "Ештеңе өзгермеуі керек", "D": "Бүкіл экран жабылып қалуы тиіс"}, "correct": "B", "explanation": "Қате болғанда өріс қызыл жиекпен белгіленіп, астында ескерту мәтіні шығуы тиіс."}, {"variant": 3, "num": 21, "question": "Мобилді қосымшаға алғаш кіргенде қолданушыға оның мүмкіндіктерін таныстыратын қысқаша слайдтар тізбегі қалай аталады?", "options": {"A": "Лендинг", "B": "Онбординг (Onboarding)", "C": "Поп-ап (Pop-up)", "D": "Блог"}, "correct": "B", "explanation": "Онбординг қолданушыны қосымшаның мүмкіндіктерімен алғаш танысуда көмектеседі."}, {"variant": 3, "num": 22, "question": "Қолжетімділік (Accessibility) бойынша POUR принциптеріндегі \"Operable\" (Басқарылатын) принципі нені білдіреді?", "options": {"A": "Дизайнның өте қымбат болуын", "B": "Пайдаланушы интерфейсті және навигацияны кез келген құрылғымен (соның ішінде тек пернетақтамен де) басқара алуын", "C": "Тек тышқанмен жұмыс істеуін", "D": "Сайттың жылдамдығын"}, "correct": "B", "explanation": "Operable принципі интерфейстің кез келген құрылғымен, мысалы тек пернетақтамен де басқарылуын талап етеді."}, {"variant": 3, "num": 23, "question": "Веб-сайттың негізгі мазмұнын, бөлімдерін және олардың өзара байланысын көрсететін логикалық карта:", "options": {"A": "User Persona", "B": "Site Map (Сайт картасы)", "C": "Layout Grid", "D": "Wireframe"}, "correct": "B", "explanation": "Site Map сайт бөлімдерінің логикалық құрылымы мен байланысын көрсетеді."}, {"variant": 3, "num": 24, "question": "InDesign-да автоматты бет нөмірін (Current Page Number) қосу үшін қандай комбинация қолданылады?", "options": {"A": "Type > Insert Special Character > Markers > Current Page Number", "B": "Edit > Paste", "C": "Layout > Pages > Add Page", "D": "File > Document Setup"}, "correct": "A", "explanation": "Автоматты бет нөмірі Type > Insert Special Character > Markers > Current Page Number арқылы қосылады."}, {"variant": 3, "num": 25, "question": "Figma-да компонентті толығымен өзінің Мастер-компонентінен ажыратып, қарапайым фреймге айналдыру функциясы:", "options": {"A": "Reset All Overrides", "B": "Detach Instance", "C": "Create Component", "D": "Component Properties"}, "correct": "B", "explanation": "Detach Instance компонентті мастерден толық ажыратып, қарапайым фреймге айналдырады."}, {"variant": 4, "num": 1, "question": "Figma-да құжат ішіндегі фреймдердің, топтардың және элементтердің иерархиялық тізімін көрсететін панель:", "options": {"A": "Design Panel", "B": "Prototype Panel", "C": "Layers Panel", "D": "Inspect Panel"}, "correct": "C", "explanation": "Layers Panel фреймдер мен элементтердің иерархиялық тізімін көрсетеді."}, {"variant": 4, "num": 2, "question": "Figma-да стандартты Desktop (Компьютер) экранының базалық ені ретінде жиі қолданылатын өлшем:", "options": {"A": "320 px", "B": "1440 px", "C": "768 px", "D": "480 px"}, "correct": "B", "explanation": "1440px — Desktop экранының базалық ені ретінде жиі қолданылады."}, {"variant": 4, "num": 3, "question": "Auto Layout режимінде \"Padding\" параметрі нені білдіреді?", "options": {"A": "Контейнердің сыртқы шегінісі", "B": "Контейнердің ішкі жиектері мен оның ішіндегі элементтер арасындағы қашықтық (шегініс)", "C": "Элементтердің мөлдірлігі", "D": "Қаріптің қалыңдығы"}, "correct": "B", "explanation": "Padding — контейнердің ішкі жиегі мен мазмұн арасындағы қашықтық."}, {"variant": 4, "num": 4, "question": "Figma-да құрылған дайын компоненттің экземпляр (Instance) екенін оның қабатындағы (Layers) қандай белгішеден білуге болады?", "options": {"A": "Бір бос ромб (♢)", "B": "4 кішкентай ромб (❖)", "C": "Шаршы", "D": "Тілше (Arrow)"}, "correct": "B", "explanation": "Instance белгішесі — 4 кішкентай ромбтан тұратын ❖ белгісі."}, {"variant": 4, "num": 5, "question": "Прототиптеуде \"Smart Animate\" жұмыс істеуі үшін негізгі маңызды шарт қандай?", "options": {"A": "Элементтердің түстері әртүрлі болуы керек", "B": "Екі түрлі экрандағы өзгеретін элементтердің қабат атаулары (Layer name) бірдей болуы тиіс", "C": "Шрифтер тек Arial болуы керек", "D": "Экрандардың өлшемдері әртүрлі болуы керек"}, "correct": "B", "explanation": "Smart Animate жұмыс істеуі үшін екі экрандағы қабат атаулары бірдей болуы шарт."}, {"variant": 4, "num": 6, "question": "Пайдаланушы интерфейсіндегі «Тақырып ауыстыратын переключатель» (Light/Dark mode switch) Figma-да интерактивті болуы үшін қандай құралмен жасалады?", "options": {"A": "Layout Grid", "B": "Component Variants және On Click прототипі", "C": "Text Styles", "D": "Handoff"}, "correct": "B", "explanation": "Light/Dark switch Component Variants пен On Click прототипінің тіркесімі арқылы жасалады."}, {"variant": 4, "num": 7, "question": "Прототипте \"On Click\" әрекетінен кейін пайда болатын \"Navigate to\" бұйрығының қызметі қандай?", "options": {"A": "Белгілі бір экраннан келесі таңдалған экранға толық ауысу (өту)", "B": "Суретті өшіру", "C": "Қалқымалы терезе ашу", "D": "Кодты көшіру"}, "correct": "A", "explanation": "Navigate to ағымдағы экраннан таңдалған экранға толық ауысуды жасайды."}, {"variant": 4, "num": 8, "question": "Figma-да дизайн элементтерінің қолжетімділігін (Accessibility) тексергенде түстердің контрастылығы (Contrast ratio) не үшін маңызды?", "options": {"A": "Сайттың жүктелу жылдамдығы үшін", "B": "Нашар көретін немесе күн сәулесі түсіп тұрған экранда қолданушылар мәтінді анық оқи алуы үшін", "C": "Сән трендтеріне сай болу үшін", "D": "Кодтың көлемін азайту үшін"}, "correct": "B", "explanation": "Жоғары контрастылық мәтінді әртүрлі жағдайда анық оқуға мүмкіндік береді."}, {"variant": 4, "num": 9, "question": "Tilda платформасындағы \"Zero Block\" құралында элементтерді бір-біріне қатысты немесе экран жиегіне қатысты бекіту функциясы қалай аталады?", "options": {"A": "Auto Layout", "B": "Grid System", "C": "Window/Container Padding", "D": "Align / Axis Anchor"}, "correct": "D", "explanation": "Align / Axis Anchor элементтерді бір-біріне немесе экран жиегіне қатысты бекітеді."}, {"variant": 4, "num": 10, "question": "Веб-сайттардың іздеу жүйелеріне жақсы индекстелуі үшін техникалық SEO-ның қай факторы өте маңызды?", "options": {"A": "Сайттың дизайн түсі", "B": "HTTPS қауіпсіздік протоколының болуы және жүктелу жылдамдығы", "C": "Тек Figma сілтемесінің болуы", "D": "Қолданылған суреттердің көптігі"}, "correct": "B", "explanation": "HTTPS пен жүктелу жылдамдығы техникалық SEO-ның маңызды факторлары."}, {"variant": 4, "num": 11, "question": "Tilda-да дайын форма арқылы жиналған деректерді (мысалы, клиенттің телефонын) қайда жіберуге болады (интеграция)?", "options": {"A": "Тек қағазға басып шығаруға болады", "B": "Email-ға, Telegram чатқа немесе CRM жүйесіне автоматты түрде", "C": "Тек Figma-ға жолдауға болады", "D": "Ешқайда жіберу мүмкін емес"}, "correct": "B", "explanation": "Форма деректерін Email, Telegram немесе CRM жүйесіне автоматты жіберуге болады."}, {"variant": 4, "num": 12, "question": "Adobe InDesign бағдарламасында \"Master Page\" (Мастер-бет) элементтерін кәдімгі жұмыс бетінде бұғаттаудан босатып, өзгерту үшін қандай пернелер басылады?", "options": {"A": "Ctrl+Z (Cmd+Z)", "B": "Shift+Ctrl (Shift+Cmd) басып тұрып, нысанды шерту", "C": "Alt+Delete", "D": "Тек тышқанның оң жағын басу"}, "correct": "B", "explanation": "Shift+Ctrl басып тұрып шерту мастер-бет элементін жұмыс бетінде бұғаттаудан босатады."}, {"variant": 4, "num": 13, "question": "Веб-дизайндағы «Ақпараттық иерархия» принципі нені білдіреді?", "options": {"A": "Элементтердің өлшемі, түсі мен орналасуы арқылы ең маңызды ақпаратқа бірінші кезекте назар аударту", "B": "Барлық мәтінді бірдей өлшеммен жазу", "C": "Суреттерді тек беттің төменгі жағына қою", "D": "Кодты жасыру"}, "correct": "A", "explanation": "Ақпараттық иерархия маңызды ақпаратты өлшем, түс және орналасу арқылы көрнекі етеді."}, {"variant": 4, "num": 14, "question": "Adobe InDesign бағдарламасының интерфейсіндегі \"Pages\" (Беттер) панелі не үшін қажет?", "options": {"A": "Тек түстерді таңдау үшін", "B": "Құжаттағы беттердің санын, ретін көру, жаңа бет қосу немесе шебер беттерді басқару үшін", "C": "Қаріп өлшемін өзгерту үшін", "D": "Мәтінді тексеру үшін"}, "correct": "B", "explanation": "Pages панелі құжаттың беттерін көру, қосу және басқаруға арналған."}, {"variant": 4, "num": 15, "question": "InDesign-да мәтіннің жоларалық қашықтығын (строчный интервал) реттейтін типографикалық термин:", "options": {"A": "Kerning (Кернинг)", "B": "Leading (Интерлиньяж / Лединг)", "C": "Tracking (Трекинг)", "D": "Alignment"}, "correct": "B", "explanation": "Leading жолдар арасындағы қашықтықты реттейтін термин."}, {"variant": 4, "num": 16, "question": "InDesign құжатына сырттан сурет қойғанда, оның сапасы экранда нашарлап (пиксельденіп) көрінсе, бұл нені білдіреді?", "options": {"A": "Сурет бұзылған", "B": "Бағдарлама жылдам жұмыс істеуі үшін Display Performance (Көрсету сапасы) режимі «Typical» күйінде тұр", "C": "Компьютерде вирус бар", "D": "Түс моделі қате таңдалған"}, "correct": "B", "explanation": "Typical режимінде сурет экранда төмен сапада көрсетіледі, бұл өнімділікті арттыру үшін істелген."}, {"variant": 4, "num": 17, "question": "Баспа өнімдерін кесу кезінде маңызды элементтер мен суреттердің шеті қиылып кетпеуі үшін InDesign құжатының сыртына берілетін арнайы өріс қалай аталады?", "options": {"A": "Margins (Шегіністер)", "B": "Bleed (Қиюға арналған өріс)", "C": "Slug", "D": "Gutter"}, "correct": "B", "explanation": "Bleed құжаттың шетіндегі элементтерді кесу кезінде қорғайтын қосымша өріс."}, {"variant": 4, "num": 18, "question": "InDesign-да кестелермен (Tables) жұмыс істеу кезінде ұяшықтардың стилін бірден реттеу үшін қандай құрал қолданылады?", "options": {"A": "Paragraph Styles", "B": "Cell Styles (Ұяшық стильдері) және Table Styles", "C": "Object Styles", "D": "Swatches"}, "correct": "B", "explanation": "Cell Styles және Table Styles кесте ұяшықтарының стилін бірден реттеуге мүмкіндік береді."}, {"variant": 4, "num": 19, "question": "Брендтің логотипін, түстерін, қаріптерін және корпоративтік стилін қолдану ережелерін сипаттайтын ресми құжат:", "options": {"A": "Портфолио", "B": "Брендбук (Brandbook) / Гайдлайн", "C": "Техникалық тапсырма", "D": "Сайт картасы"}, "correct": "B", "explanation": "Брендбук брендтің визуалды элементтерін қолдану ережелерін сипаттайтын құжат."}, {"variant": 4, "num": 20, "question": "Пайдаланушы интерфейсіндегі «Прогресс индикаторы» (Progress bar) не үшін қолданылады?", "options": {"A": "Сайтты толығымен өшіру үшін", "B": "Қандай да бір процестің (жүктелу, тіркелу қадамдары) қаншалықты орындалғанын визуалды көрсету үшін", "C": "Пайдаланушыға жарнама көрсету үшін", "D": "Түсті таңдау үшін"}, "correct": "B", "explanation": "Progress bar процестің қаншалықты орындалғанын визуалды көрсетеді."}, {"variant": 4, "num": 21, "question": "Модалды терезе ашылғанда оның артындағы негізгі экранның күңгірттенуі немесе көрінбей қалуы Figma-да қалай бапталады?", "options": {"A": "Close when clicking outside", "B": "Add background behind overlay (Күңгірт түс таңдау арқылы)", "C": "Auto Layout padding", "D": "Reset constraints"}, "correct": "B", "explanation": "Add background behind overlay overlay артындағы фонды күңгірттендіруге мүмкіндік береді."}, {"variant": 4, "num": 22, "question": "Қолжетімділік (Accessibility) бойынша POUR принциптеріндегі соңғы «R» («Robust») әрпі нені білдіреді?", "options": {"A": "Түстің қанықтылығы", "B": "Тұрақтылық (мазмұнның әртүрлі браузерлер мен көмекші технологияларда, мысалы, экрандық дикторларда сенімді жұмыс істеуі)", "C": "Өте жылдам жылдамдық", "D": "Дизайнның көркемдігі"}, "correct": "B", "explanation": "Robust принципі мазмұнның әртүрлі браузерлер мен көмекші технологияларда тұрақты жұмыс істеуін білдіреді."}, {"variant": 4, "num": 23, "question": "Tilda-да сайттың мобильді нұсқасын оңтайландырғанда суреттердің жылдам жүктелуі үшін қолданылатын технология:", "options": {"A": "Lazy Load (Суреттердің пайдаланушы экранды төмен түсіргенде ғана кезегімен жүктелуі)", "B": "Тек үлкен форматта сақтау", "C": "Барлық суретті өшіру", "D": "Кодты қолмен өзгерту"}, "correct": "A", "explanation": "Lazy Load суреттерді пайдаланушы экранды айналдырғанда ғана жүктейді, бұл жылдамдықты арттырады."}, {"variant": 4, "num": 24, "question": "InDesign бағдарламасындағы \"Links\" панелінде суреттің қасында қызыл сұрақ белгісі (?) тұрса, бұл нені білдіреді?", "options": {"A": "Сурет сәтті жүктелді", "B": "Сілтеме жоғалған (суреттің компьютердегі орны өзгерген немесе өшірілген)", "C": "Суреттің түсі қате", "D": "Мәтін сыймай қалды"}, "correct": "B", "explanation": "Қызыл сұрақ белгісі сурет файлының орны өзгергенін немесе жоғалғанын білдіреді."}, {"variant": 4, "num": 25, "question": "Дизайн токендері мен компоненттер кітапханасын (Component Library) қолданудың басты артықшылығы неде?", "options": {"A": "Дизайн құнын арзандатады", "B": "Өнімнің бүкіл беттерінде визуалды бірізділікті (Consistency) сақтап, дизайн жүйесін жылдам өзгертуге мүмкіндік береді", "C": "Тек Figma-ның жад көлемін үнемдейді", "D": "Компьютердің жылдамдығын арттырады"}, "correct": "B", "explanation": "Design Tokens пен Component Library визуалды бірізділікті сақтап, дизайн жүйесін жылдам жаңартуға мүмкіндік береді."}];
+// Тёмная тема: инициализация и переключение
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  updateThemeButton(savedTheme);
+}
 
-const SETS = [
-  {key:'1', label:'Вариант I', icon:'I'},
-  {key:'2', label:'Вариант II', icon:'II'},
-  {key:'3', label:'Вариант III', icon:'III'},
-  {key:'4', label:'Вариант IV', icon:'IV'},
+function updateThemeButton(theme) {
+  const btnSpan = document.querySelector('#themeToggleBtn span');
+  if (theme === 'dark') {
+    btnSpan.textContent = 'Түнгі';
+  } else {
+    btnSpan.textContent = 'Күндізгі';
+  }
+}
+
+document.getElementById('themeToggleBtn').addEventListener('click', () => {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  updateThemeButton(newTheme);
+});
+
+initTheme();
+
+// Полный массив из 100 вопросов со всеми скобками и правильной нумерацией
+const QUESTIONS = [
+  // === ВАРИАНТ 1 ===
+  {"variant": 1, "num": 1, "question": "Figma-да өзара байланысқан элементтердің динамикалық өзгеруін қамтамасыз ететін функция:", "options": {"A": "Layout Grid", "B": "Auto Layout", "C": "Smart Animate", "D": "Component Library"}, "correct": "B", "explanation": "Auto Layout контейнер мен оның ішіндегі элементтердің өлшемін бір-біріне байланысты автоматты түрде өзгертіп отырады."},
+  {"variant": 1, "num": 2, "question": "Figma интерфейсіндегі \"Canvas\" дегеніміз не?", "options": {"A": "Жобаның барлық элементтері мен фреймдері орналасатын шексіз жұмыс кеңістігі", "B": "Дайын макеттерді кодқа айналдыратын панель", "C": "Тек қаріптер мен түстерді реттейтін құрал", "D": "Сол жақтағы қабаттар (Layers) тізімі"}, "correct": "A", "explanation": "Canvas — фреймдер мен элементтер орналастырылатын шексіз жұмыс аймағы."},
+  {"variant": 1, "num": 3, "question": "Figma-да Мастер-компоненттің көшірмесі қалай аталады?", "options": {"A": "Variant", "B": "Main Component", "C": "Instance (Экземпляр)", "D": "Frame"}, "correct": "C", "explanation": "Instance — мастер-компоненттен жасалған көшірме, ол мастермен байланыста қалады."},
+  {"variant": 1, "num": 4, "question": "Прототиптеу кезінде нысанның бастапқы және соңғы күйін автоматты түрде танып, тегіс ауысуды жасайтын функция:", "options": {"A": "Dissolve", "B": "On Click", "C": "Smart Animate", "D": "Move In"}, "correct": "C", "explanation": "Smart Animate екі экрандағы бірдей атаулы қабаттардың арасында тегіс анимация жасайды."},
+  {"variant": 1, "num": 5, "question": "Figma-дағы \"Dev Mode\" режимінің негізгі мақсаты қандай?", "options": {"A": "Векторлық иллюстрациялар салу", "B": "Әзірлеушілерге (девелоперлерге) дизайн кодтарын, өлшемдер мен токендерді ыңғайлы көруге жағдай жасау", "C": "Интерактивті прототипті іске қосу", "D": "Мәтиннің грамматикасын тексеру"}, "correct": "B", "explanation": "Dev Mode дизайнды кодқа айналдыру кезінде CSS мәндерін, өлшемдер мен токендерді көрсетеді."},
+  {"variant": 1, "num": 6, "question": "Пайдаланушы интерфейсінің қолжетімділігін (Accessibility) анықтайтын POUR принциптерінің бірінші әрпі («P») нені білдіреді?", "options": {"A": "Perceivable (Қабылданатын)", "B": "Predictable (Болжанатын)", "C": "Robust (Тұрақты)", "D": "Processable (Өңделетін)"}, "correct": "A", "explanation": "POUR принципінің бірінші әрпі — Perceivable, яғни ақпарат пайдаланушыға қабылданатын түрде ұсынылуы тиіс."},
+  {"variant": 1, "num": 7, "question": "Figma-да бірнеше батырма күйлерін (Default, Hover, Disabled) бір компонент ішінде топтастыру үшін қандай құрал қолданылады?", "options": {"A": "Layout Grid", "B": "Variants", "C": "Overlay", "D": "Device Frame"}, "correct": "B", "explanation": "Variants компоненттің бірнеше күйін бір топ ішінде басқаруға мүмкүнкіндік береді."},
+  {"variant": 1, "num": 8, "question": "Прототип параметрлеріндегі \"Overlay\" (модалды терезе үшін) функциясының қызметі қандай?", "options": {"A": "Экранды толығымен жаңа бетке ауыстыру", "B": "Ағымдағы беттің үстінен жаңа кішігірім терезені (қалқымалы) ашу", "C": "Дизайнды баспаға дайындау", "D": "Суреттердің түсін өзгерту"}, "correct": "B", "explanation": "Overlay ағымдағы экранды жаппай, оның үстінен қалқымалы терезе ашады."},
+  {"variant": 1, "num": 9, "question": "Tilda платформасындағы \"Zero Block\" дегеніміз не?", "options": {"A": "Дайын стандартты блоктар жиынтығы", "B": "Дизайнерге элементтерді еркін орналастыруға мүмкіндік беретін нөлден бастап жасалатын бос бағдарламалаусыз блок", "C": "Тек қателерді тексеретін техникалық блок", "D": "Сайттың жертөлесі (Footer)"}, "correct": "B", "explanation": "Zero Block — Tilda-да кодсыз еркін дизайн құруға арналған құрал."},
+  {"variant": 1, "num": 10, "question": "Tilda-да сайттың іздеу жүйелерінде жоғары деңгейде көрінуін қамтамасыз ететін оңтайландыру процесі:", "options": {"A": "UX Design", "B": "SEO (Search Engine Optimization)", "C": "Responsive Web Design", "D": "Handoff"}, "correct": "B", "explanation": "SEO — сайтты іздеу жүйелерінде жоғары орынға шығаруға бағытталған оңтайландыру."},
+  {"variant": 1, "num": 11, "question": "Веб-дизайндағы Юзабилити (UX) принциптері неге бағытталған?", "options": {"A": "Сайттың тек түстік гаммасын сәнді етуге", "B": "Пайдаланушының сайтты барынша ыңғайлы, түсінікті және кедергісіз қолдануына", "C": "Сайтқа үлкен көлемді видеолар жүктеуге", "D": "Бағдарламалау кодын қысқартуға"}, "correct": "B", "explanation": "UX принциптері пайдаланушы тәжірибесінің ыңғайлылығы мен түсініктілігіне бағытталған."},
+  {"variant": 1, "num": 12, "question": "Төмендегілердің қайсысы семантикалық HTML тегіне жатады және сайттың құрылымын іздеу роботтарына түсінікті етеді?", "options": {"A": "<div>", "B": "<span>", "C": "<article>", "D": "<b>"}, "correct": "C", "explanation": "<article> мазмұнның логикалық бөлігін білдіретін семантикалық тег, ал div/span тегтері семантикалық мағына білдірмейді."},
+  {"variant": 1, "num": 13, "question": "Tilda-да пайдаланушылардан деректер жинау үшін міндетті түрде қандай элемент қолданылады?", "options": {"A": "Карусель (Slider)", "B": "Форма (Form) және батырма (Button)", "C": "Аккордеон (Accordion)", "D": "Меню (Navigation menu)"}, "correct": "B", "explanation": "Деректерді жинау үшін Form элементі міндетті, ал Button оны жіберуге қажет."},
+  {"variant": 1, "num": 14, "question": "Adobe InDesign бағдарламасы негізінен қандай мақсатта қолданылады?", "options": {"A": "3D модельдеу және анимация жасау", "B": "Көпбетті басылымдарды (кітап, журнал, брендбук, портфолио) беттеу және баспаға дайындау", "C": "Күрделі бейнебаяндарды монтаждау", "D": "Векторлық логотиптерді нөлден салу"}, "correct": "B", "explanation": "InDesign кітап, журнал, брендбук сияқты көпбетті материалдарды беттеуге арналған."},
+  {"variant": 1, "num": 15, "question": "InDesign-да барлық беттерде қайталанатын элементтерді автоматты түрде орналастыру үшін қолданылатын шаблон бет қалай аталады?", "options": {"A": "Document Setup", "B": "Master Page (Мастер-бет)", "C": "Swatches Panel", "D": "Character Style"}, "correct": "B", "explanation": "Master Page барлық беттерде қайталанатын элементтерді (логотип, нөмір) автоматты орналастырады."},
+  {"variant": 1, "num": 16, "question": "InDesign-да мәтіннің тек жекелеген сөздеріне немесе әріптеріне қолданылатын стиль түрі:", "options": {"A": "Paragraph Style", "B": "Character Style (Таңбалық стиль)", "C": "Object Style", "D": "Table Style"}, "correct": "B", "explanation": "Character Style жеке сөздер немесе әріптерге қолданылатын стиль түрі."},
+  {"variant": 1, "num": 17, "question": "InDesign-да баспаға жібермес бұрын құжаттағы қателерді автоматты тексеретін функция:", "options": {"A": "Preflight (Макетті тексеру)", "B": "Package", "C": "Export", "D": "Hyperlinks"}, "correct": "A", "explanation": "Preflight құжаттағы баспаға кедергі болатын қателерді алдын ала тексереді."},
+  {"variant": 1, "num": 18, "question": "Баспа өнімдерін дайындау кезінде (полиграфияда) қолданылатын негізгі түс моделі:", "options": {"A": "RGB", "B": "CMYK", "C": "HEX", "D": "HSL"}, "correct": "B", "explanation": "Баспа өнімдеріне арналған негізгі түс моделі — CMYK."},
+  {"variant": 1, "num": 19, "question": "InDesign-да суреттер мен графикалардың компьютердегі мекенжайына сілтеме жасап тұратын панелі:", "options": {"A": "Layers", "B": "Swatches", "C": "Links", "D": "Pages"}, "correct": "C", "explanation": "Links панелі құжатқа орналастырылған суреттердің түпнұсқа мекенжайына сілтеме жасап тұрады."},
+  {"variant": 1, "num": 20, "question": "Figma-да жобаны әзірлеушіге тапсыру (Handoff) алдында түстер мен қаріптерді жүйелеу үшін жасалатын ортақ атаулар мен мәндер жиынтығы:", "options": {"A": "Design Tokens", "B": "Smart Animate", "C": "Layout Grid", "D": "Component Instance"}, "correct": "A", "explanation": "Design Tokens — түстер мен қаріптерді кодпен сәйкестіруге арналған ортақ мәндер жүйесі."},
+  {"variant": 1, "num": 21, "question": "Tilda-да аккордеондар мен табтар (tabs) не үшін қолданылады?", "options": {"A": "Сайттың жылдамдығын арттыру үшін", "B": "Ақпаратты ықшамдап, пайдаланушы басқанда ғана ашылатындай етіп интерактивті орналастыру үшін", "C": "Жаңа домен сатып алу үшін", "D": "SEO параметрлерін толтыру Scientific"}, "correct": "B", "explanation": "Аккордеон мен табтар үлкен ақпаратты ықшамдап, тек қажет кезде ашылатындай етіп көрсетеді."},
+  {"variant": 1, "num": 22, "question": "Веб-дизайндағы «Ақпараттық архитектура» дегеніміз не?", "options": {"A": "Сайттың серверде сақталу көлемі", "B": "Сайттағы контенттің логикалық құрылымы, пайдаланушыға түсінікті навигациясы мен иерархиясы", "C": "Тек суреттердің сапасы", "D": "HTML кодын жазу стилі"}, "correct": "B", "explanation": "Ақпараттық архитектура — контенттің логикалық құрылымы мен навигация иерархиясы."},
+  {"variant": 1, "num": 23, "question": "Adobe InDesign бағдарламасында \"Overset text\" (сыймай қалған мәтін) белгісі қандай түспен көрінеді?", "options": {"A": "Жасыл дөңгелек", "B": "Көк үшбұрыш", "C": "Қызыл плюс (+) белгісі бар шаршы", "D": "Сары леп белгісі"}, "correct": "C", "explanation": "Overset text белгісі — мәтіндік фреймнің бұрышындағы қызыл плюс белгісі бар шаршы."},
+  {"variant": 1, "num": 24, "question": "Көп бетті құжатты баспаханаға толық файлдарымен, қолданылған қаріптерімен және суреттерімен бір папкаға жинақтап өткізу процесі:", "options": {"A": "Preflight", "B": "Package (Бумалау)", "C": "Liquid Layout", "D": "Content Collector"}, "correct": "B", "explanation": "Package барлық қажетті файлдарды (қаріп, сурет) бір папкаға жинайды."},
+  {"variant": 1, "num": 25, "question": "Figma-да прототипті мобильді құрылғының экраны сияқты етіп көрсету үшін қолданылатын параметр:", "options": {"A": "Device Frame", "B": "Background Color", "C": "Canvas Size", "D": "Constraints"}, "correct": "A", "explanation": "Device Frame прототипті нақты құрылғы экраны түрінде көрсетуге мүмкіндік береді."},
+
+  // === ВАРИАНТ 2 ===
+  {"variant": 2, "num": 1, "question": "Figma-да \"Layers\" (Қабаттар) панелі интерфейстің қай бөлігінде орналасқан?", "options": {"A": "Оң жақ панельде", "B": "Жоғарғы құралдар панелінде", "C": "Сол жақ панельде", "D": "Төменгі бөлікте"}, "correct": "C", "explanation": "Layers панелі әдетте интерфейстің сол жағында орналасады."},
+  {"variant": 2, "num": 2, "question": "Төмендегі өлшемдердің қайсысы заманауи стандартты Mobile (Мобильді) экран фреймінің еніне сәйкес келеді?", "options": {"A": "1920 px", "B": "393 px (мысалы, iPhone 14/15)", "C": "1440 px", "D": "1024 px"}, "correct": "B", "explanation": "393px — заманауи смартфондардың (мысалы iPhone 14/15) стандартты ені болып табылады."},
+  {"variant": 2, "num": 3, "question": "Auto Layout қолданылған контейнерде элементтердің арасындағы қашықтықты реттейтін параметр:", "options": {"A": "Padding", "B": "Gap (Spacing between items)", "C": "Alignment", "D": "Constraints"}, "correct": "B", "explanation": "Gap элементтер арасындағы қашықтықты реттейді."},
+  {"variant": 2, "num": 4, "question": "Мастер-компонентке (Main Component) өзгеріс енгізгенде не болады?", "options": {"A": "Оның барлық экземплярлары (көшірмелері) автоматты түрде өзгереді", "B": "Экземплярлар жойылып кетеді", "C": "Тек таңдалған бір көшірме өзгереді", "D": "Ештеңе өзгермейді"}, "correct": "A", "explanation": "Мастер-компоненттегі өзгеріс барлық оның instance көшірмелеріне автоматты тарайды."},
+  {"variant": 2, "num": 5, "question": "Пайдаланушы элементтің үстіне меңзерді әкелгенде іске қосылатын прототип триггері (Trigger):", "options": {"A": "On Click", "B": "While Hovering", "C": "On Drag", "D": "After Delay"}, "correct": "B", "explanation": "While Hovering — элементтің үстіне меңзерді апарған кездегі интерактивтілік триггері."},
+  {"variant": 2, "num": 6, "question": "Figma-да жасалған дизайн макетін CSS кодтарымен, қашықтықтармен және түс кодтарымен көрсетіп, бағдарламашыға ыңғайлы ететін режим:", "options": {"A": "Design Mode", "B": "Dev Mode", "C": "Prototype Mode", "D": "Observation Mode"}, "correct": "B", "explanation": "Dev Mode әзірлеушілерге макеттен техникалық деректерді тез оқуға мүмкіндік береді."},
+  {"variant": 2, "num": 7, "question": "Веб-интерфейстің контрасттылығын (Мәтін мен фонның айырмашылығын) тексеру қолжетімділіктің (Accessibility) қай принципіне жатады?", "options": {"A": "Perceivable (Қабылданатын)", "B": "Operable (Басқарылатын)", "C": "Understandable (Түсінікті)", "D": "Robust (Тұрақты)"}, "correct": "A", "explanation": "Контраст мәтіннің көзбен дұрыс қабылдануына (Perceivable) тікелей әсер етеді."},
+  {"variant": 2, "num": 8, "question": "Figma-да бір батырманың бірнеше түрін немесе күйін (мысалы, Бастапқы, Басылған, Түсі өзгерген) бір топқа біріктіретін құрал:", "options": {"A": "Frame Section", "B": "Variants (Варианттар)", "C": "Auto Layout", "D": "Smart Filter"}, "correct": "B", "explanation": "Variants бір элементтің әртүрлі күйлерін бір ортақ компонент ішінде топтастырады."},
+  {"variant": 2, "num": 9, "question": "Прототиптегі \"Close when clicking outside\" функциясы модалды терезе үшін не істейді?", "options": {"A": "Пайдаланушы модалды терезенің сыртына (бос аймаққа) басқанда терезені автоматты түрде жабады", "B": "Браузерді толық жауып тастайды", "C": "Терезенің өлшемін үлкейтеді", "D": "Анимацияны тоқтатады"}, "correct": "A", "explanation": "Бұл параметр сырттан шерткенде қалқымалы (модалды) терезені автоматты түрде жабады."},
+  {"variant": 2, "num": 10, "question": "Tilda-да тор (Grid) жүйесі бойынша басты контейнердің стандартты ені неше пиксельге тең?", "options": {"A": "1920 px", "B": "1200 px", "C": "960 px", "D": "1440 px"}, "correct": "B", "explanation": "Tilda-ның стандартты торлы бағандарының жалпы ені 1200 пиксельді құрайды."},
+  {"variant": 2, "num": 11, "question": "Tilda-да дизайнерге ешқандай шектеусіз, элементтерді пиксель бойынша еркін орналастыруға мүмкіндік беретін арнайы блок:", "options": {"A": "Стандартты блок", "B": "Zero Block", "C": "HTML Block", "D": "Footer Block"}, "correct": "B", "explanation": "Zero Block — дизайнердің еркін шығармашылығына арналған бос кодсыз кенеп."},
+  {"variant": 2, "num": 12, "question": "Сайт бетіндегі негізгі тақырыпты (Заголовок первого уровня) іздеу роботтары дұрыс тануы үшін қандай тег қолданылады?", "options": {"A": "<h6>", "B": "<h1>", "C": "<p>", "D": "<div>"}, "correct": "B", "explanation": "<h1> тегі сайттағы ең негізгі, бірінші деңгейдегі тақырыпты білдіреді."},
+  {"variant": 2, "num": 13, "question": "Tilda-да жазылған сайттың Google немесе Yandex іздеу жүйелерінде дұрыс индекстеліп, жоғары шығуы үшін жасалатын баптаулар жиынтығы:", "options": {"A": "UI баптаулары", "B": "SEO баптаулары", "C": "Анимация баптаулары", "D": "Домен баптаулары"}, "correct": "B", "explanation": "SEO баптаулары сайттың іздеу нәтижелерінде оңтайлы көрінуіне жауапты."},
+  {"variant": 2, "num": 14, "question": "Tilda-да карусель (Slider) блогының басты қызметі қандай?", "options": {"A": "Пайдаланушыдан хат қабылдау", "B": "Бірнеше суретті немесе ақпаратты бір блок ішінде кезекпен ауыстырып көрсету", "C": "Сайтқа видео фон қою", "D": "Код жазу"}, "correct": "B", "explanation": "Карусель шектеулі аймақта бірнеше слайдты немесе суретті кезекпен ауыстыруға көмектеседі."},
+  {"variant": 2, "num": 15, "question": "Adobe InDesign бағдарламасында көп бетті құжаттың (кітаптың) шеткі шегіністері мен бағандарын реттейтін мәзір:", "options": {"A": "File -> Export", "B": "Layout -> Margins and Columns", "C": "Window -> Links", "D": "Edit -> Preferences"}, "correct": "B", "explanation": "Margins and Columns беттің шеткі бос шегіністері мен бағандар санын реттейді."},
+  {"variant": 2, "num": 16, "question": "InDesign-да бүкіл құжаттағы абзацтардың (мәтін блоктарының) қаріпін, өлшемін және аралықтарын бір уақытта өзгерту үшін қандай стиль түрі қолданылады?", "options": {"A": "Character Style", "B": "Paragraph Style (Абзацтық стиль)", "C": "Object Style", "D": "Table Style"}, "correct": "B", "explanation": "Paragraph Style тұтас абзацтардың мәтіндік пішімін бірден басқаруға арналған стиль құралы."},
+  {"variant": 2, "num": 17, "question": "InDesign-да құжат беттерін автоматты түрде нөмірлеу (Нумерация страниц) үшін қай бетке арнайы маркер қойылады?", "options": {"A": "Кез келген жай бетке", "B": "Master Page (Мастер-бетке)", "C": "Тек бірінші бетке", "D": "Мұқабаға (Обложка)"}, "correct": "B", "explanation": "Автоматты бет нөмірлері барлық бетке таралуы үшін Master Page-ге орналастырылады."},
+  {"variant": 2, "num": 18, "question": "InDesign-да Preflight панелінде қызыл түсті индикатор жанып тұрса, бұл нені білдіреді?", "options": {"A": "Құжат баспаға толық дайын", "B": "Құжатта қателер бар (мысалы, сурет жоғалған немесе мәтін сыймай қалған)", "C": "Бағдарлама жұмысын тоқтатты", "D": "Файл сәтті сақталды"}, "correct": "B", "explanation": "Preflight-тағы қызыл түс макетте баспаға жіберу алдында түзетілуі тиіс қате барын білдіреді."},
+  {"variant": 2, "num": 19, "question": "Экрандық құрылғыларға (Сайттар, мобильді қосымшалар) арналған дизайн жасауда қолданылатын негізгі түс моделі:", "options": {"A": "CMYK", "B": "RGB", "C": "Pantone", "D": "RAL"}, "correct": "B", "explanation": "Экрандар мен мониторлар үшін негізгі цифрлық түс форматы — RGB."},
+  {"variant": 2, "num": 20, "question": "InDesign-да жасалған макетті баспаханаға (Полиграфияға) өткізу үшін ең қолайлы стандартты файл форматы:", "options": {"A": "JPEG", "B": "PDF (Press Quality немесе PDF/X)", "C": "PNG", "D": "HTML"}, "correct": "B", "explanation": "Баспаханаға сапалы басып шығару үшін макет әдетте PDF форматында экспортталады."},
+  {"variant": 2, "num": 21, "question": "Модалды терезе ашылғанда оның артындағы негізгі экранның күңгірттенуі немесе көрінбей қалуы Figma-да қалай бапталады?", "options": {"A": "Close when clicking outside", "B": "Add background behind overlay (Күңгірт түс таңдау арқылы)", "C": "Auto Layout padding", "D": "Reset constraints"}, "correct": "B", "explanation": "Add background behind overlay опциясы артқы фонды күңгірттеп, назарды қалқымалы терезеге аударады."},
+  {"variant": 2, "num": 22, "question": "Қолжетімділік (Accessibility) бойынша POUR принциптеріндегі соңғы «R» («Robust») әрпі нені білдіреді?", "options": {"A": "Түстің қанықтылығы", "B": "Тұрақтылық (мазмұнның әртүрлі браузерлер мен көмекші технологияларда, мысалы, экрандық дикторларда сенімді жұмыс істеуі)", "C": "Өте жылдам жылдамдық", "D": "Дизайнның көркемдігі"}, "correct": "B", "explanation": "Robust — мазмұнның болашақ технологиялармен және көмекші бағдарламалармен тұрақты, сенімді үйлесімділігі."},
+  {"variant": 2, "num": 23, "question": "Tilda-да сайттың мобильді нұсқасын оңтайландырғанда (Лайфхактар) суреттердің жылдам жүктелуі үшін қолданылатын технология:", "options": {"A": "Lazy Load (Суреттердің пайдаланушы экранды төмен түсіргенде ғана кезегімен жүктелуі)", "B": "Тек үлкен форматта сақтау", "C": "Барлық суретті өшіру", "D": "Кодты қолмен өзгерту"}, "correct": "A", "explanation": "Lazy Load технологиясы тек көрініс аймағына жақындаған суреттерді жүктеп, сайт жылдамдығын арттырады."},
+  {"variant": 2, "num": 24, "question": "InDesign бағдарламасындағы \"Links\" панелінде суреттің тұсында сары леп белгісі (!) шығып тұрса, бұл нені білдіреді?", "options": {"A": "Сурет толығымен жойылған", "B": "Суреттің түпнұсқа файлы сырттан өзгертілген және оны жаңарту (Update Link) қажет", "C": "Суреттің сапасы тым жоғары", "D": "Бұл қате емес, жай ескерту"}, "correct": "B", "explanation": "Сары леп белгісі суреттің сыртқы файлы өзгергенін және сілтемені жаңарту керектігін нұсқайды."},
+  {"variant": 2, "num": 25, "question": "Figma-да компоненттің ішкі қасиеттерін (мысалы, мәтінді немесе иконканы тез ауыстыру мүмкіндігін) баптау қалай аталады?", "options": {"A": "Component Properties", "B": "Layer Mask", "C": "Vector Networks", "D": "Smart Selection"}, "correct": "A", "explanation": "Component Properties компонент көшірмелерінің ішкі мәндерін тез өзгертуге арналған қасиеттер."},
+
+  // === ВАРИАНТ 3 ===
+  {"variant": 3, "num": 1, "question": "Figma-да объектілердің фрейм (Frame) шекараларына байланысты өзін-өзі ұстауын (мысалы, экран созылғанда оң жақта қалуын) реттейтін құрал:", "options": {"A": "Auto Layout", "B": "Constraints (Шектеулер)", "C": "Layout Grid", "D": "Smart Guide"}, "correct": "B", "explanation": "Constraints фрейм өлшемі өзгергенде элементтердің қай шетке бекітілетінін анықтайды."},
+  {"variant": 3, "num": 2, "question": "Figma-дағы компоненттің негізгі түпнұсқасы қалай аталады?", "options": {"A": "Instance", "B": "Main Component (Мастер-компонент)", "C": "Variant", "D": "Library"}, "correct": "B", "explanation": "Main Component — барлық көшірмелерді басқаратын негізгі басты компонент."},
+  {"variant": 3, "num": 3, "question": "Пайдаланушы экранды төмен айналдырса да, сайттың шарлау мәзірі (Navigation Menu) жоғарыда өз орнында тұрақтап тұруы үшін Figma-да қандай баптау қолданылады?", "options": {"A": "Smart Animate", "B": "Fix position when scrolling (Scroll айналдырғанда орнын бекіту)", "C": "Horizontal Scrolling", "D": "Auto Layout fill"}, "correct": "B", "explanation": "\"Fix position when scrolling\" парақша жылжыса да, элементтің экранда тұрақты қалуын қамтамасыз етеді."},
+  {"variant": 3, "num": 4, "question": "Figma-да бірнеше элементті таңдап, пернетақтадан Shift + A бассаңыз не болады?", "options": {"A": "Олар топтастырылады (Group)", "B": "Оларға Auto Layout қолданылады", "C": "Олар жойылады", "D": "Жоба сақталады"}, "correct": "B", "explanation": "Shift + A — Auto Layout контейнерін құруға арналған негізгі пернелер тіркесімі."},
+  {"variant": 3, "num": 5, "question": "Қолжетімділік (Accessibility) бойынша POUR принциптеріндегі «U» («Understandable») әрпі нені талап етеді?", "options": {"A": "Сайт кодын қысқартуды", "B": "Интерфейстегі мәтіндер мен басқару элементтерінің пайдаланушыға түсінікті, логикалық болуын", "C": "Тек ағылшын тілін қолдануды", "D": "Суреттердің көп болуын"}, "correct": "B", "explanation": "Understandable принципі интерфейстің және ондағы ақпараттың пайдаланушыға барынша түсінікті болуын талап етеді."},
+  {"variant": 3, "num": 6, "question": "Figma-да \"Export\" панелі арқылы дизайн макетін сапасын жоғалтпай, векторлық форматта бағдарламашыға беру үшін қай формат таңдалады?", "options": {"A": "PNG", "B": "SVG", "C": "JPEG", "D": "MP4"}, "correct": "B", "explanation": "SVG — сапасын жоғалтпай кез келген өлшемге созылатын векторлық графика форматы."},
+  {"variant": 3, "num": 7, "question": "Tilda-да сайттың ең жоғарғы бөлігінде орналасатын және логотип, мәзір (Меню) кіретін стандартты блок қалай аталады?", "options": {"A": "Footer", "B": "Header (Шапка)", "C": "Sidebar", "D": "Cover"}, "correct": "B", "explanation": "Header — сайттың ең жоғарғы навигациялық бас бөлігі."},
+  {"variant": 3, "num": 8, "question": "Tilda-да дайын стандартты блоктардың ішкі элементтерін (Мәтінін, суретін, батырма сілтемесін) өзгерту үшін қай батырма басылады?", "options": {"A": "Settings", "B": "Content (Мазмұн)", "C": "Zero Block", "D": "Publish"}, "correct": "B", "explanation": "Content батырмасы стандартты блоктардың мәтіндері мен суреттерін өзгертуге арналған."},
+  {"variant": 3, "num": 9, "question": "Tilda-да жасалған сайтты интернет желісінде ресми түрде жариялап, сілтеме (URL) арқылы қолжетімді ету үшін басылатын міндетті батырма:", "options": {"A": "Save", "B": "Publish (Жариялау)", "C": "Preview", "D": "Cancel"}, "correct": "B", "explanation": "Publish батырмасы сайтқа енгізілген өзгерістерді интернетте тікелей іске қосады."},
+  {"variant": 3, "num": 10, "question": "Сайтта пайдаланушыға кері байланыс жасауға (мысалы, атын және телефонын қалдыруға) мүмкіндік беретін Tilda блогы:", "options": {"A": "Галерея", "B": "Форма (Form)", "C": "Тек мәтін", "D": "Әлеуметтік желілер"}, "correct": "B", "explanation": "Форма блогы пайдаланушылардан деректер мен өтінімдер қабылдау үшін қолданылады."},
+  {"variant": 3, "num": 11, "question": "Tilda-да сайттың әр түрлі экрандарға (Монитор, Планшет, Смартфон) автоматты түрде бейімделіп, әдемі көрінуі қалай аталады?", "options": {"A": "Анимация", "B": "Адаптивтілік (Бейімделгіш дизайн)", "C": "SEO оңтайландыру", "D": "Домендеу"}, "correct": "B", "explanation": "Адаптивтілік сайттың кез келген құрылғы экранына ыңғайлы болып реттелуін қамтамасыз етеді."},
+  {"variant": 3, "num": 12, "question": "HTML құжатында суретке баламалы мәтін жазу үшін және сурет жүктелмей қалғанда көрінуі үшін қолданылатын атрибут:", "options": {"A": "src", "B": "alt", "C": "href", "D": "class"}, "correct": "B", "explanation": "alt атрибуты суреттің сипаттамалық мәтінін сақтайды (іздеу роботтары мен зағип жандар үшін маңызды)."},
+  {"variant": 3, "num": 13, "question": "Adobe InDesign бағдарламасында құжат жасау кезіндегі \"Facing Pages\" (Разворот страницы) құсбелгісінің қызметі қандай?", "options": {"A": "Беттерді тек тігінен орналастыру", "B": "Құжатты кітап сияқты екі беттен тұратын разворот түрінде көрсету", "C": "Беттердің бәрін жою", "D": "Тек бір беттік парақша жасау"}, "correct": "B", "explanation": "Facing Pages кітап немесе журнал сияқты қос бетті (разворотты) құрылым жасауға мүмкіндік береді."},
+  {"variant": 3, "num": 14, "question": "InDesign-да мәтін ішіндегі таңдалған жеке бір сөздің түсін немесе қаріпін жылдам өзгертіп, оны стиль ретінде сақтау құралы:", "options": {"A": "Paragraph Style", "B": "Character Style", "cs": "Object Style", "D": "Table Style"}, "correct": "B", "explanation": "Character Style абзац ішіндегі бөлек таңбалар мен сөздерге стиль қолдануға арналған."},
+  {"variant": 3, "num": 15, "question": "InDesign-да макеттегі барлық қолданылған суреттер мен қаріптерді (Шрифтерді) жоғалтпай баспаханаға өткізу үшін жасалатын папка жиынтығы қалай аталады?", "options": {"A": "Preflight", "B": "Package (Бума)", "C": "Export", "D": "Preferences"}, "correct": "B", "explanation": "Package функциясы жобаға қажетті барлық ресурс файлдарын бір папкаға автоматты жинақтайды."},
+  {"variant": 3, "num": 16, "question": "InDesign-да мәтіндік блоктың төменгі оң жақ бұрышында қызыл түсті плюс (+) белгісі шықса, бұл нені білдіреді?", "options": {"A": "Мәтін сәтті аяқталды", "B": "Фреймге сыймай қалған жасырын мәтін бар (Overset text)", "C": "Жаңа бет қосылды", "D": "Қаріп қатесі бар"}, "correct": "B", "explanation": "Қызыл плюс белгісі мәтін көлемінің фреймнен асып, сыймай қалғанын (Overset) көрсетеді."},
+  {"variant": 3, "num": 17, "question": "InDesign-да түстер палитрасын басқаратын және жаңа түстер сақтайтын негізгі панель:", "options": {"A": "Layers", "B": "Swatches (Үлгілер)", "C": "Links", "D": "Pages"}, "correct": "B", "explanation": "Swatches панелі жобада қолданылатын түс үлгілерін сақтауға және басқаруға арналған."},
+  {"variant": 3, "num": 18, "question": "Веб-дизайндағы «Прототип» дегеніміз не?", "options": {"A": "Дайын бағдарламалау коды", "B": "Интерфейстің басуға, өзара әрекеттесуге болатын интерактивті логикалық моделі", "C": "Сайттың логотипі", "D": "Тек мәтіндер жиынтығы"}, "correct": "B", "explanation": "Прототип — дизайнның жұмыс істеу логикасын тексеретін интерактивті нұсқасы."},
+  {"variant": 3, "num": 19, "question": "Tilda-да сайттың ең төменгі, авторлық құқықтар мен байланыс деректері орналасатын бөлігі қалай аталады?", "options": {"A": "Header", "B": "Footer (Жертөле)", "C": "Cover", "D": "Menu"}, "correct": "B", "explanation": "Footer — сайт бетінің ең астында орналасатын ақпараттық бөлігі."},
+  {"variant": 3, "num": 20, "question": "Figma-да компоненттің сыртқы жиектерін қиып, тек белгілі бір пішіннің (мысалы, шеңбердің) ішінде ғана көрсету функциясы:", "options": {"A": "Auto Layout", "B": "Mask (Маска)", "C": "Union Selection", "D": "Constraints"}, "correct": "B", "explanation": "Mask функциясы астындағы фигураның пішіні бойынша объектінің көріну аймағын шектейді."},
+  {"variant": 3, "num": 21, "question": "InDesign бағдарламасында суреттер мен сыртқы файлдармен байланысты басқаратын панель:", "options": {"A": "Pages", "B": "Links (Сілтемелер)", "C": "Layers", "D": "Paragraph Styles"}, "correct": "B", "explanation": "Links панелі құжат ішіндегі барлық сыртқы графикалық сілтемелерді бақылайды."},
+  {"variant": 3, "num": 22, "question": "Figma-да екі элементті бір-біріне қатысты ортаға, солға немесе оңға теңестіру үшін жоғарғы оң жақта орналасқан құралдар тобы:", "options": {"A": "Constraints", "B": "Alignment tools (Туралау құралдары)", "C": "Boolean Groups", "D": "Layer Blending"}, "correct": "B", "explanation": "Alignment құралдары таңдалған элементтерді бір сызықтың бойымен жылдам туралауға арналған."},
+  {"variant": 3, "num": 23, "question": "Tilda-да стандартты блоктың параметрлеріндегі \"Padding\" (Шегініс) мәні не үшін қажет?", "options": {"A": "Блоктың ішкі мазмұны мен оның жоғарғы/төменгі шекаралары арасындағы бос қашықтықты реттеу үшін", "B": "Сайттың түсін өзгерту үшін", "C": "Жаңа баған қосу үшін", "D": "Шрифт өлшемін үлкейту үшін"}, "correct": "A", "explanation": "Padding мәндері блоктар арасындағы визуалды ауаны және ішкі бос кеңістікті реттейді."},
+  {"variant": 3, "num": 24, "question": "Figma-да Smart Animate функциясы дұрыс жұмыс істеуі үшін екі түрлі экрандағы (Frame) өзгеретін элементтерде қандай шарт міндетті түрде орындалуы керек?", "options": {"A": "Элементтердің түсі бірдей болуы керек", "B": "Элементтердің атаулары (Слой аты) бірдей болуы керек", "C": "Элементтер тек шеңбер болуы керек", "D": "Ешқандай шарт қажет емес"}, "correct": "B", "explanation": "Smart Animate екі фреймдегі қабаттарды дәл бірдей атаулары (Layer Name) арқылы танып байланыстырады."},
+  {"variant": 3, "num": 25, "question": "Дизайндағы басымдылықты (Негізгі ақпаратты үлкен, қосымша ақпаратты кіші қылып көрсету) анықтайтын маңызды UX/UI принципі:", "options": {"A": "Түс балансы", "B": "Визуалды иерархия", "C": "Адаптивтілік", "D": "Техникалық тұрақтылық"}, "correct": "B", "explanation": "Визуалды иерархия пайдаланушының назарын маңыздылық деңгейіне қарай ретімен бағыттайды."},
+
+  // === ВАРИАНТ 4 ===
+  {"variant": 4, "num": 1, "question": "Figma-да тор көздерін (Сетка) құру арқылы элементтерді пропорционалды орналастыруға көмектесетін функция:", "options": {"A": "Auto Layout", "B": "Layout Grid (Тор жүйесі)", "C": "Smart Selection", "D": "Constraints"}, "correct": "B", "explanation": "Layout Grid макеттің құрылымдық бағандары мен торларын сызуға арналған."},
+  {"variant": 4, "num": 2, "question": "Figma-да жасалған бірнеше дербес компоненттерді ортақ бір үлкен файлға жинақтап, басқа команда мүшелеріне қолжетімді ету функциясы:", "options": {"A": "Team Library (Компоненттер кітапханасы)", "B": "Dev Mode", "C": "Version History", "D": "Smart Filter"}, "correct": "A", "explanation": "Team Library ортақ компоненттер мен стильдерді бүкіл командаға ортақ кітапхана ретінде бөлісуге мүмкіндік береді."},
+  {"variant": 4, "num": 3, "question": "Прототиптеуде \"After Delay\" (Кешігуден кейін) триггерінің ерекшелігі қандай?", "options": {"A": "Пайдаланушы батырманы басқанда ғана іске қосылады", "B": "Пайдаланушы ештеңе баспаса да, белгілі бір уақыттан (миллисекундтан) кейін автоматты түрде келесі бетке ауысады", "C": "Тек мобильді телефондарда жұмыс істейді", "D": "Элементті өшіріп тастайды"}, "correct": "B", "explanation": "After Delay пайдаланушының әрекетінсіз, тек уақыт аралығы өткен соң автоматты түрде анимацияны іске қосады."},
+  {"variant": 4, "num": 4, "question": "Figma-да объектінің мөлдірлігін (Прозрачность) пайыздық мәнмен реттейтін параметр:", "options": {"A": "Stroke", "B": "Opacity", "C": "Fill", "D": "Effects"}, "correct": "B", "explanation": "Opacity қабаттың немесе түстің визуалды мөлдірлік деңгейін анықтайды."},
+  {"variant": 4, "num": 5, "question": "Пайдаланушы интерфейсінің қолжетімділігін (Accessibility) қамтамасыз ететін POUR принциптеріндегі «O» («Operable») әрпі нені білдіреді?", "options": {"A": "Сайттың тек әдемі болуын", "B": "Басқарылатындық (пайдаланушы интерфейстің навигациялық элементтерін, мысалы, пернетақта арқылы еш кедергісіз басқара алуы)", "C": "Жедел жүктелу жылдамдығын", "D": "Тек тышқанмен басқаруды"}, "correct": "B", "explanation": "Operable принципі интерфейстің барлық пайдаланушыларға ыңғайлы басқарылуын (соның ішінде пернетақтамен) талап етеді."},
+  {"variant": 4, "num": 6, "question": "Tilda платформасындағы стандартты блоктардың Zero Block-тан басты айырмашылығы қандай?", "options": {"A": "Олар тегін емес", "B": "Олар алдын ала құрылымы мен дизайны дайын жасалған, тек мазмұнын өзгертуге келетін блоктар", "C": "Оларға видео қосуға болмайды", "D": "Олар тек кодпен жұмыс істейді"}, "correct": "B", "explanation": "Стандартты блоктар — Tilda-ның алдын ала дайындалған, тек мәтіні мен суреті өзгеретін құрылымдық бөліктері."},
+  {"variant": 4, "num": 7, "question": "Tilda-да сайттың басты бетіндегі батырмаға басқанда, пайдаланушыны жаңа бетке емес, ағымдағы беттің белгілі бір төменгі блогына жылдам апару үшін қолданылатын сілтеме түрі:", "options": {"A": "Сыртқы URL сілтемесі", "B": "Якорьлі сілтеме (Anchor link - мысалы, #blocklink)", "C": "Пошта сілтемесі", "D": "Ешқандай сілтеме қажет емес"}, "correct": "B", "explanation": "Якорьлі сілтемелер бетті ауыстырмай, бір беттің ішінде белгілі бір блокқа (якорьге) жылдам жылжытады."},
+  {"variant": 4, "num": 8, "question": "Tilda-да сайттың техникалық параметрлерінде (Site Settings) \"Custom Domain\" бөлімі не үшін қажет?", "options": {"A": "Сайттың қаріптерін өзгерту үшін", "B": "Сайтқа өзіңіз сатып алған жеке бірегей домендік атауды (мысалы, mysite.kz) қосу үшін", "C": "Жаңа блоктар сатып алу үшін", "D": "Статистиканы көру үшін"}, "correct": "B", "explanation": "Custom Domain бөлімі сайтқа сырттан сатып алынған жеке кәсіби доменді жалғауға арналған."},
+  {"variant": 4, "num": 9, "question": "Сайттың жүктелу жылдамдығын арттыру үшін Tilda-да суреттерді қандай заманауи жеңіл форматта жүктеген тиімді?", "options": {"A": "TIFF", "B": "WebP (немесе SVG)", "C": "BMP", "D": "PSD"}, "correct": "B", "explanation": "WebP — суреттің сапасын сақтай отырып, оның салмағын барынша азайтатын заманауи веб-формат."},
+  {"variant": 4, "num": 10, "question": "Веб-парақшаның мазмұны мен құрылымын анықтайтын негізгі стандартты белгілеу тілі:", "options": {"A": "PHP", "B": "HTML (HyperText Markup Language)", "C": "Python", "D": "Figma AI"}, "correct": "B", "explanation": "HTML — веб-дизайн макеттерін браузерге түсінікті құрылымға айналдыратын негізгі белгілеу тілі."},
+  {"variant": 4, "num": 11, "question": "Adobe InDesign бағдарламасында құжатты баспаға дайындауда суреттердің сапасының өлшемі (Разрешение) стандарт бойынша кем дегенде неше DPI болуы керек?", "options": {"A": "72 dpi", "B": "300 dpi", "C": "150 dpi", "D": "1200 dpi"}, "correct": "B", "explanation": "Полиграфиялық баспа үшін стандартты жоғары сурет сапасы 300 DPI құрауы тиіс."},
+  {"variant": 4, "num": 12, "question": "InDesign-да құжаттың шеткі қиылып кететін бөлігіне (Обрезанное поле) берілетін қауіпсіздік шегінісі қалай аталады?", "options": {"A": "Margins", "B": "Bleed (Қиюға арналған өріс)", "C": "Slug", "D": "Gutter"}, "correct": "B", "explanation": "Bleed — баспадан шыққан соң шеттерін қиғанда дизайн бұзылмас үшін берілетін арнайы сыртқы өріс."},
+  {"variant": 4, "num": 13, "question": "InDesign бағдарламасында мәтіндік және графикалық фреймдердің орналасу ретін бақылайтын және оларды топтастыратын панель:", "options": {"A": "Swatches", "B": "Layers (Қабаттар)", "C": "Links", "D": "Paragraph Styles"}, "correct": "B", "explanation": "Layers панелі элементтердің бір-бірінің үстінде орналасу ретін (иерархиясын) басқарады."},
+  {"variant": 4, "num": 14, "question": "Figma-да объектінің астына көлеңке (Связанная тень) қосу үшін қай эффект түрі таңдалады?", "options": {"A": "Layer Blur", "B": "Drop Shadow", "C": "Inner Shadow", "D": "Background Blur"}, "correct": "B", "explanation": "Drop Shadow эффектісі объектінің сыртына сыртқы визуалды көлеңке түсіру үшін қолданылады."},
+  {"variant": 4, "num": 15, "question": "Tilda-да сайтқа кірген пайдаланушылардың санын, қай елден келгенін және қандай блоктарды көп қарағанын бақылайтын ішкі құрал:", "options": {"A": "SEO оңтайландыру", "B": "Сайт статистикасы (Статистика сайта)", "C": "Zero Block редакторы", "D": "Формалар тізімі"}, "correct": "B", "explanation": "Сайт статистикасы парақшасы келушілердің белсенділігі мен деректерін талдауға көмектеседі."},
+  {"variant": 4, "num": 16, "question": "InDesign-да мәтінді бір фреймнен екінші фреймге автоматты түрде ағызып жалғастыру процесі қалай аталады?", "options": {"A": "Текстті көшіру", "B": "Мәтіндік фреймдерді байланыстыру (Threading text)", "C": "Preflight жасау", "D": "Стильдеу"}, "correct": "B", "explanation": "Threading text (байланыстыру) мәтіннің бір блоктан келесі блокқа үзілмей, автоматты түрде ағып өтуін ұйымдастырады."},
+  {"variant": 4, "num": 17, "question": "Figma-да векторлық нүктелермен еркін жұмыс істеп, бірегей пішіндер немесе белгішелер (Иконка) салуға арналған негізгі құрал:", "options": {"A": "Rectangle tool", "B": "Pen tool (Қалам құралы)", "C": "Slice tool", "D": "Hand tool"}, "correct": "B", "explanation": "Pen tool — векторлық сызықтар мен күрделі пішіндерді нөлден бастап салуға арналған кәсіби құрал."},
+  {"variant": 4, "num": 18, "question": "Tilda-да жасалған сайттың браузердегі кішкентай белгішесі (вкладкадағы логотипі) қалай аталады?", "options": {"A": "Badge", "B": "Favicon", "C": "Banner", "D": "Mark"}, "correct": "B", "explanation": "Favicon — браузер вкладкасында сайт атауының қасында көрініп тұратын кішкентай таңбаша сурет."},
+  {"variant": 4, "num": 19, "question": "InDesign-да құжаттың екі бетінің арасындағы ортақ бос орын, яғни кітап түптелетін ішкі шегініс қалай аталады?", "options": {"A": "Bleed", "B": "Gutter (Орталық өріс)", "C": "Margin", "D": "Slug"}, "correct": "B", "explanation": "Gutter — бағандар арасындағы немесе разворот ортасындағы түптеуге арналған бос аралық кеңістік."},
+  {"variant": 4, "num": 20, "question": "Figma-дағы прототиптеу байланыстарын толығымен жоймай, жай ғана нәтижесін көру үшін жоғарғы оң жақ бұрыштағы басылатын белгіше:", "options": {"A": "Share", "B": "Present (Іске қосу / Просмотр)", "C": "Export", "D": "Cut"}, "correct": "B", "explanation": "Present (ойнату белгішесі) прототиптің интерактивті жұмысын арнайы демонстрациялық экранда көрсетеді."},
+  {"variant": 4, "num": 21, "question": "Tilda-да дайын стандартты блоктың үстіне тышқанды апарғанда оң жақта пайда болатын батырмалардың ішіндегі екі шаршы белгішесінің (Копировать) қызметі қандай?", "options": {"A": "Блокты өшіру", "B": "Блоктың дәл өзін төменнен дубликат қылып көшірмесін жасау (Duplicate)", "C": "Блокты жасыру", "D": "Блоктың стилін өзгерту"}, "correct": "B", "explanation": "Duplicate батырмасы таңдалған блоктың барлық параметрлерімен бірге дәл сондай көшірмесін жасайды."},
+  {"variant": 4, "num": 22, "question": "Adobe InDesign бағдарламасында құжат беттерінің ретін ауыстыруға, жаңа бет қосуға немесе жоюға арналған негізгі панель:", "options": {"A": "Links", "B": "Pages (Беттер панелі)", "C": "Layers", "D": "Swatches"}, "correct": "B", "explanation": "Pages панелі құжаттың барлық беттік құрылымын, макеттерін және ретін басқару орталығы болып табылады."},
+  {"variant": 4, "num": 23, "question": "Figma-да бірнеше фигураны біріктіріп, ортақ бір күрделі векторлық пішін жасауға арналған құралдар тобы (Union, Subtract, Intersect, Exclude):", "options": {"A": "Mask tools", "B": "Boolean Groups (Логикалық топтар)", "C": "Layout Grids", "D": "Component Sets"}, "correct": "B", "explanation": "Boolean Groups құралдары екі немесе одан көп геометриялық фигураларды қиылыстыру не біріктіру үшін қолданылады."},
+  {"variant": 4, "num": 24, "question": "Tilda-да блоктардың арасындағы ақпаратты бөліп тұратын және визуалды демалыс беретін элементтер орналасатын арнайы категория:", "options": {"A": "Форма және батырма", "B": "Бөлгіштер (Разделители)", "C": "Плитка және сілтеме", "D": "Карусель"}, "correct": "B", "explanation": "Разделители (Бөлгіштер) категориясы блоктар арасына сызықтар немесе визуалды бос кеңістіктер қосуға арналған."},
+  {"variant": 4, "num": 25, "question": "Дизайндағы қолданушының назарын ең бірінші кезекте маңызды элементке (мысалы, акция батырмасына) аудару үшін қолданылатын визуалды әдіс:", "options": {"A": "Контраст (Айырмашылық жасау)", "B": "Элементті кішірейту", "C": "Оны беттің ең астына қою", "D": "Бүкіл мәтінді өшіру"}, "correct": "A", "explanation": "Контраст (түс, өлшем не пішін арқылы) элементті баса көрсетіп, пайдаланушы назарын бірден өзіне аударады."}
 ];
-const ROMAN = {1:'I',2:'II',3:'III',4:'IV'};
 
-let activeSetKey = null;
-let pool = [];
-let idx = 0;
+const VARIANTS_CONFIG = [
+  { id: 1, title: "І НҰСҚА", meta: "Figma & Дизайн негіздері (1-25)" },
+  { id: 2, title: "ІІ НҰСҚА", meta: "Figma & Tilda & InDesign (26-50)" },
+  { id: 3, title: "ІІІ НҰСҚА", meta: "Figma & Tilda & InDesign (51-75)" },
+  { id: 4, title: "ІV НҰСҚА", meta: "Figma, Tilda & Желілік негіздер (76-100)" }
+];
+
+// Состояние приложения
+let selectedVariantId = null;
+let currentQuestions = [];
+let currentQIdx = 0;
+let userAnswers = []; // { q: obj, chosen: string, isCorrect: bool }
 let correctCount = 0;
-let mistakes = [];
-let selectedLetter = null;
-let answered = false;
+let chosenOptionLetter = null;
 
-const screens = {
-  start: document.getElementById('screen-start'),
-  study: document.getElementById('screen-study'),
-  quiz: document.getElementById('screen-quiz'),
-  result: document.getElementById('screen-result'),
-};
-const topBadge = document.getElementById('topBadge');
-const BADGE_LABELS = {start:'СТАРТ', study:'КАБИНЕТ', quiz:'ТЕСТ', result:'РЕЗУЛЬТАТ'};
+// DOM Элементы
+const screenStart = document.getElementById('screen-start');
+const screenStudy = document.getElementById('screen-study');
+const screenQuiz = document.getElementById('screen-quiz');
+const screenResult = document.getElementById('screen-result');
 
-function showScreen(name){
-  Object.values(screens).forEach(s=>s.classList.remove('active'));
-  screens[name].classList.add('active');
-  topBadge.textContent = BADGE_LABELS[name];
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-
-/* ---------- build start screen cards ---------- */
 const setGrid = document.getElementById('setGrid');
-function renderSetCards(){
-  setGrid.innerHTML = '';
-  SETS.forEach(s=>{
-    const count = QUESTIONS.filter(q=>String(q.variant)===s.key).length;
-    const card = document.createElement('div');
-    card.className = 'set-card';
-    card.tabIndex = 0;
-    card.dataset.key = s.key;
-    card.innerHTML = `<div class="num">${s.icon}</div><div class="meta">${count} вопросов</div>`;
-    card.addEventListener('click', ()=>selectSet(s.key, card));
-    card.addEventListener('keydown', e=>{ if(e.key==='Enter') selectSet(s.key, card); });
-    setGrid.appendChild(card);
-  });
-  const fullCard = document.createElement('div');
-  fullCard.className = 'set-card full';
-  fullCard.tabIndex = 0;
-  fullCard.dataset.key = 'all';
-  fullCard.innerHTML = `<div><div class="num">Все вопросы</div><div class="meta">${QUESTIONS.length} вопросов · все 4 варианта</div></div><div class="pill">ПОЛНЫЙ КУРС</div>`;
-  fullCard.addEventListener('click', ()=>selectSet('all', fullCard));
-  fullCard.addEventListener('keydown', e=>{ if(e.key==='Enter') selectSet('all', fullCard); });
-  setGrid.appendChild(fullCard);
-}
-function selectSet(key, cardEl){
-  activeSetKey = key;
-  document.querySelectorAll('.set-card').forEach(c=>c.classList.remove('selected'));
-  cardEl.classList.add('selected');
-  document.getElementById('startBtn').disabled = false;
-}
-renderSetCards();
+const startBtn = document.getElementById('startBtn');
+const openStudyBtn = document.getElementById('openStudyBtn');
+const backFromStudyBtn = document.getElementById('backFromStudyBtn');
+const toQuizFromStudyBtn = document.getElementById('toQuizFromStudyBtn');
+const studyContent = document.getElementById('studyContent');
 
-document.getElementById('startBtn').addEventListener('click', ()=>{
-  if(!activeSetKey) return;
-  pool = activeSetKey === 'all' ? QUESTIONS.slice() : QUESTIONS.filter(q=>String(q.variant)===activeSetKey);
-  idx = 0; correctCount = 0; mistakes = [];
-  showScreen('quiz');
-  renderQuestion();
-});
+const expandAllBtn = document.getElementById('expandAllBtn');
+const collapseAllBtn = document.getElementById('collapseAllBtn');
 
-/* ---------- study / cabinet screen ---------- */
-function buildStudyContent(){
-  const container = document.getElementById('studyContent');
-  container.innerHTML = '';
-  [1,2,3,4].forEach(v=>{
-    const items = QUESTIONS.filter(q=>q.variant===v);
-    const det = document.createElement('details');
-    det.className = 'details-variant';
-    if(v === 1) det.open = true;
+const progressLabel = document.getElementById('progressLabel');
+const scoreLabel = document.getElementById('scoreLabel');
+const progressFill = document.getElementById('progressFill');
 
-    const summary = document.createElement('summary');
-    summary.innerHTML = `<span>Вариант ${ROMAN[v]}</span><span class="meta">${items.length} вопросов</span><span class="chevron">⌄</span>`;
-    det.appendChild(summary);
-
-    const body = document.createElement('div');
-    body.className = 'details-body';
-    items.forEach(q=>{
-      const card = document.createElement('div');
-      card.className = 'study-card';
-      let optsHtml = '';
-      Object.entries(q.options).forEach(([letter, text])=>{
-        const isCorrect = letter === q.correct;
-        optsHtml += `<div class="study-option ${isCorrect ? 'correct' : ''}">
-            <div class="letter">${letter}</div>
-            <div class="text">${text}</div>
-            ${isCorrect ? '<div class="check">✓</div>' : ''}
-          </div>`;
-      });
-      card.innerHTML = `
-        <div class="study-q">${q.num}. ${q.question}</div>
-        <div class="study-options">${optsHtml}</div>
-        <div class="study-explain"><b>Объяснение:</b> ${q.explanation}</div>
-      `;
-      body.appendChild(card);
-    });
-    det.appendChild(body);
-    container.appendChild(det);
-  });
-}
-buildStudyContent();
-
-document.getElementById('openStudyBtn').addEventListener('click', ()=>showScreen('study'));
-document.getElementById('backFromStudyBtn').addEventListener('click', ()=>showScreen('start'));
-document.getElementById('toQuizFromStudyBtn').addEventListener('click', ()=>showScreen('start'));
-document.getElementById('expandAllBtn').addEventListener('click', ()=>{
-  document.querySelectorAll('.details-variant').forEach(d=>d.open = true);
-});
-document.getElementById('collapseAllBtn').addEventListener('click', ()=>{
-  document.querySelectorAll('.details-variant').forEach(d=>d.open = false);
-});
-
-/* ---------- quiz logic ---------- */
 const qEyebrow = document.getElementById('qEyebrow');
 const qText = document.getElementById('qText');
 const optionsWrap = document.getElementById('optionsWrap');
 const feedbackWrap = document.getElementById('feedbackWrap');
 const actionBtn = document.getElementById('actionBtn');
-const progressLabel = document.getElementById('progressLabel');
-const scoreLabel = document.getElementById('scoreLabel');
-const progressFill = document.getElementById('progressFill');
 
-function renderQuestion(){
-  const q = pool[idx];
-  selectedLetter = null;
-  answered = false;
+const gaugeCircle = document.getElementById('gaugeCircle');
+const gaugeNum = document.getElementById('gaugeNum');
+const resultMsg = document.getElementById('resultMsg');
+const resultSub = document.getElementById('resultSub');
+const statCorrect = document.getElementById('statCorrect');
+const statWrong = document.getElementById('statWrong');
+const statTotal = document.getElementById('statTotal');
+const mistakesSection = document.getElementById('mistakesSection');
+const restartBtn = document.getElementById('restartBtn');
+const topBadge = document.getElementById('topBadge');
+
+// Инициализация стартового экрана
+function initApp() {
+  setGrid.innerHTML = '';
+  VARIANTS_CONFIG.forEach(v => {
+    const card = document.createElement('div');
+    card.className = 'set-card';
+    card.innerHTML = `
+      <div class="num">${v.title}</div>
+      <div class="meta">${v.meta}</div>
+    `;
+    card.addEventListener('click', () => selectVariant(v.id, card));
+    setGrid.appendChild(card);
+  });
+
+  // Карточка "Барлығы 100 сұрақ"
+  const fullCard = document.createElement('div');
+  fullCard.className = 'set-card full';
+  fullCard.innerHTML = `
+    <div>
+      <div class="num">МЕГА-МИКС</div>
+      <div class="meta">Барлық 100 сұрақ кездейсоқ ретпен</div>
+    </div>
+    <div class="pill">100 СҰРАҚ</div>
+  `;
+  fullCard.addEventListener('click', () => selectVariant('all', fullCard));
+  setGrid.appendChild(fullCard);
+}
+
+function selectVariant(id, cardEl) {
+  selectedVariantId = id;
+  document.querySelectorAll('.set-card').forEach(c => c.classList.remove('selected'));
+  cardEl.classList.add('selected');
+  startBtn.disabled = false;
+}
+
+// Переключение экранов
+function switchScreen(target) {
+  [screenStart, screenStudy, screenQuiz, screenResult].forEach(s => s.classList.remove('active'));
+  target.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// СТАРТ ТЕСТА
+startBtn.addEventListener('click', () => {
+  if (!selectedVariantId) return;
+  setupQuiz(selectedVariantId);
+});
+
+toQuizFromStudyBtn.addEventListener('click', () => {
+  switchScreen(screenStart);
+  if(!selectedVariantId) {
+    const firstCard = setGrid.querySelector('.set-card');
+    if(firstCard) firstCard.click();
+  }
+  setupQuiz(selectedVariantId || 1);
+});
+
+function setupQuiz(variantId) {
+  if (variantId === 'all') {
+    currentQuestions = [...QUESTIONS].sort(() => Math.random() - 0.5);
+    topBadge.textContent = "МИКС";
+  } else {
+    currentQuestions = QUESTIONS.filter(q => q.variant === variantId);
+    topBadge.textContent = `НҰСҚА ${variantId}`;
+  }
+
+  currentQIdx = 0;
+  correctCount = 0;
+  userAnswers = [];
+  
+  switchScreen(screenQuiz);
+  showQuestion();
+}
+
+function showQuestion() {
+  chosenOptionLetter = null;
+  actionBtn.disabled = true;
+  actionBtn.textContent = "Ответить";
   feedbackWrap.innerHTML = '';
-  qEyebrow.textContent = `ВАРИАНТ ${ROMAN[q.variant]} · ВОПРОС ${idx+1} ИЗ ${pool.length}`;
+  
+  const q = currentQuestions[currentQIdx];
+  
+  // Обновление прогресс-бара
+  progressLabel.textContent = `Сұрақ ${currentQIdx + 1} / ${currentQuestions.length}`;
+  scoreLabel.textContent = `Дұрыс: ${correctCount}`;
+  const pct = (currentQIdx / currentQuestions.length) * 100;
+  progressFill.style.width = `${pct}%`;
+  
+  if (selectedVariantId === 'all') {
+    qEyebrow.textContent = `МЕГА-МИКС · СҰРАҚ ${currentQIdx + 1}`;
+  } else {
+    qEyebrow.textContent = `ВАРИАНТ ${romanize(q.variant)} · СҰРАҚ ${q.num}`;
+  }
+  
   qText.textContent = q.question;
   optionsWrap.innerHTML = '';
-  Object.entries(q.options).forEach(([letter, text])=>{
+  
+  Object.keys(q.options).forEach(letter => {
     const opt = document.createElement('div');
     opt.className = 'option';
-    opt.dataset.letter = letter;
-    opt.tabIndex = 0;
-    opt.innerHTML = `<div class="letter">${letter}</div><div class="text">${text}</div>`;
-    opt.addEventListener('click', ()=>chooseOption(letter));
-    opt.addEventListener('keydown', e=>{ if(e.key==='Enter') chooseOption(letter); });
+    
+    const letBox = document.createElement('div');
+    letBox.className = 'letter';
+    letBox.textContent = letter;
+    
+    const txtBox = document.createElement('div');
+    txtBox.className = 'text';
+    // Используем textContent для безопасного вывода тегов, вроде <div>
+    txtBox.textContent = q.options[letter];
+    
+    opt.appendChild(letBox);
+    opt.appendChild(txtBox);
+    
+    opt.addEventListener('click', () => {
+      if (opt.classList.contains('locked')) return;
+      
+      document.querySelectorAll('.option').forEach(o => o.classList.remove('chosen'));
+      opt.classList.add('chosen');
+      chosenOptionLetter = letter;
+      actionBtn.disabled = false;
+    });
+    
     optionsWrap.appendChild(opt);
   });
-  actionBtn.textContent = 'Ответить';
-  actionBtn.disabled = true;
-  actionBtn.onclick = submitAnswer;
-
-  progressLabel.textContent = `Вопрос ${idx+1} из ${pool.length}`;
-  scoreLabel.textContent = `Правильно: ${correctCount}`;
-  progressFill.style.width = `${(idx/pool.length)*100}%`;
 }
 
-function chooseOption(letter){
-  if(answered) return;
-  selectedLetter = letter;
-  document.querySelectorAll('.option').forEach(o=>{
-    o.classList.toggle('chosen', o.dataset.letter === letter);
+actionBtn.addEventListener('click', () => {
+  if (actionBtn.textContent === "Келесі сұрақ" || actionBtn.textContent === "Нәтижені көру") {
+    currentQIdx++;
+    if (currentQIdx < currentQuestions.length) {
+      showQuestion();
+    } else {
+      showResults();
+    }
+    return;
+  }
+  
+  if (!chosenOptionLetter) return;
+  
+  const q = currentQuestions[currentQIdx];
+  const isCorrect = (chosenOptionLetter === q.correct);
+  if (isCorrect) correctCount++;
+  
+  userAnswers.push({ q: q, chosen: chosenOptionLetter, isCorrect: isCorrect });
+  
+  // Блокировка и раскраска кнопок
+  const opts = optionsWrap.querySelectorAll('.option');
+  Object.keys(q.options).forEach((letter, idx) => {
+    const optEl = opts[idx];
+    optEl.classList.add('locked');
+    optEl.classList.remove('chosen');
+    
+    if (letter === q.correct) {
+      optEl.classList.add('is-correct');
+    } else if (letter === chosenOptionLetter) {
+      optEl.classList.add('is-wrong');
+    }
   });
-  actionBtn.disabled = false;
-}
-
-function submitAnswer(){
-  if(!selectedLetter || answered) return;
-  answered = true;
-  const q = pool[idx];
-  const isCorrect = selectedLetter === q.correct;
-  if(isCorrect){ correctCount++; }
-  else { mistakes.push({q, chosen: selectedLetter}); }
-
-  document.querySelectorAll('.option').forEach(o=>{
-    o.classList.add('locked');
-    const letter = o.dataset.letter;
-    if(letter === q.correct) o.classList.add('is-correct');
-    else if(letter === selectedLetter) o.classList.add('is-wrong');
-  });
-
+  
+  // Генерация фидбека и объяснения
   const fb = document.createElement('div');
-  fb.className = 'feedback ' + (isCorrect ? 'ok' : 'bad');
+  fb.className = `feedback ${isCorrect ? 'ok' : 'bad'}`;
+  
+  let headText = isCorrect ? "🎉 Керемет! Жауап дұрыс" : "❌ Қате жауап";
+  let correctLineText = isCorrect ? "" : `<div class="correct-line">Дұрыс нұсқасы: <b>${q.correct}) ${escapeHtml(q.options[q.correct])}</b></div>`;
+  
   fb.innerHTML = `
-    <div class="feedback-head">${isCorrect ? '✅ Верно!' : '❌ Неправильно'}</div>
-    ${isCorrect ? '' : `<div class="correct-line">Правильный ответ: <b>${q.correct}) ${q.options[q.correct]}</b></div>`}
-    <div class="explain"><b>Объяснение:</b> ${q.explanation}</div>
+    <div class="feedback-head">${headText}</div>
+    ${correctLineText}
+    <div class="explain"><b>Түсіндірме:</b> ${escapeHtml(q.explanation)}</div>
   `;
-  feedbackWrap.innerHTML = '';
   feedbackWrap.appendChild(fb);
-
-  scoreLabel.textContent = `Правильно: ${correctCount}`;
-  progressFill.style.width = `${((idx+1)/pool.length)*100}%`;
-
-  actionBtn.textContent = (idx === pool.length - 1) ? 'Показать результат' : 'Следующий вопрос';
-  actionBtn.disabled = false;
-  actionBtn.onclick = nextStep;
-}
-
-function nextStep(){
-  if(idx === pool.length - 1){
-    showResults();
+  
+  // Прокрутка вниз к объяснению
+  setTimeout(() => fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 80);
+  
+  scoreLabel.textContent = `Дұрыс: ${correctCount}`;
+  const pct = ((currentQIdx + 1) / currentQuestions.length) * 100;
+  progressFill.style.width = `${pct}%`;
+  
+  if (currentQIdx === currentQuestions.length - 1) {
+    actionBtn.textContent = "Нәтижені көру";
   } else {
-    idx++;
-    renderQuestion();
+    actionBtn.textContent = "Келесі сұрақ";
   }
-}
-
-/* ---------- results ---------- */
-function showResults(){
-  showScreen('result');
-  const total = pool.length;
-  const wrong = mistakes.length;
-  const pct = Math.round((correctCount/total)*100);
-
-  document.getElementById('statCorrect').textContent = correctCount;
-  document.getElementById('statWrong').textContent = wrong;
-  document.getElementById('statTotal').textContent = total;
-
-  const circle = document.getElementById('gaugeCircle');
-  const circumference = 2 * Math.PI * 78;
-  circle.setAttribute('stroke-dasharray', circumference.toFixed(1));
-  let color = '#2563EB';
-  if(pct >= 80) color = '#15803d';
-  else if(pct < 50) color = '#b91c1c';
-  circle.setAttribute('stroke', color);
-
-  // animate count-up + ring
-  const numEl = document.getElementById('gaugeNum');
-  let start = null;
-  const duration = 900;
-  function step(ts){
-    if(!start) start = ts;
-    const progress = Math.min((ts-start)/duration, 1);
-    const current = Math.round(progress * pct);
-    numEl.textContent = current + '%';
-    const offset = circumference * (1 - (progress*pct/100));
-    circle.setAttribute('stroke-dashoffset', offset.toFixed(1));
-    if(progress < 1) requestAnimationFrame(step);
-  }
-  circle.setAttribute('stroke-dashoffset', circumference.toFixed(1));
-  requestAnimationFrame(step);
-
-  let msg, sub;
-  if(pct >= 90){ msg = 'Превосходно!'; sub = 'Вы отлично знаете материал и готовы к экзамену.'; }
-  else if(pct >= 70){ msg = 'Хороший результат!'; sub = 'Осталось повторить пару тем — и можно идти на экзамен.'; }
-  else if(pct >= 50){ msg = 'Неплохо, но есть над чем поработать.'; sub = 'Разберите ошибки ниже и пройдите тест ещё раз.'; }
-  else { msg = 'Материал нужно повторить.'; sub = 'Изучите разбор ошибок и попробуйте пройти тест заново.'; }
-  document.getElementById('resultMsg').textContent = msg;
-  document.getElementById('resultSub').textContent = sub;
-
-  const section = document.getElementById('mistakesSection');
-  if(wrong === 0){
-    section.innerHTML = `<div class="all-clear">🎉 Ни одной ошибки — отличная работа!</div>`;
-  } else {
-    let html = `
-      <div class="mistakes-title">Разбор ошибок <span class="count">${wrong}</span></div>
-      <p class="mistakes-sub">Посмотрите, что было выбрано неверно, и какой ответ правильный.</p>
-    `;
-    mistakes.forEach(m=>{
-      html += `
-        <div class="mistake-card">
-          <div class="mq">${m.q.question}</div>
-          <div class="mistake-line your"><b>Ваш ответ:</b> ${m.chosen}) ${m.q.options[m.chosen]}</div>
-          <div class="mistake-line right"><b>Правильный ответ:</b> ${m.q.correct}) ${m.q.options[m.q.correct]}</div>
-          <div class="mistake-explain">${m.q.explanation}</div>
-        </div>
-      `;
-    });
-    section.innerHTML = html;
-  }
-}
-
-document.getElementById('restartBtn').addEventListener('click', ()=>{
-  activeSetKey = null;
-  document.querySelectorAll('.set-card').forEach(c=>c.classList.remove('selected'));
-  document.getElementById('startBtn').disabled = true;
-  showScreen('start');
 });
+
+// ПОКАЗ РЕЗУЛЬТАТОВ
+function showResults() {
+  switchScreen(screenResult);
+  topBadge.textContent = "НӘТИЖЕ";
+  
+  const total = currentQuestions.length;
+  const pct = Math.round((correctCount / total) * 100);
+  
+  gaugeNum.textContent = `${pct}%`;
+  
+  // Анимация SVG круглого прогресса
+  const circleLen = 2 * Math.PI * 78; // ~490.1
+  const offset = circleLen - (pct / 100) * circleLen;
+  gaugeCircle.style.strokeDashoffset = offset;
+  
+  statCorrect.textContent = correctCount;
+  statWrong.textContent = total - correctCount;
+  statTotal.textContent = total;
+  
+  // Текст вердикта
+  if (pct === 100) {
+    resultMsg.textContent = "Керемет! Капитан Грант!";
+    resultSub.textContent = "Сіз барлық сұрақтарға мінсіз жауап бердіңіз. Экзаменге 100% дайынсыз!";
+  } else if (pct >= 85) {
+    resultMsg.textContent = "Өте жақсы нәтиже!";
+    resultSub.textContent = "Сіз тақырыпты жоғары деңгейде меңгердіңіз. Экзаменнен «Үздік» алуға мүмкіндік көп!";
+  } else if (pct >= 50) {
+    resultMsg.textContent = "Жақсы, бірақ ширату керек";
+    resultSub.textContent = "Сіз сұрақтардың жартысынан астамынан өттіңіз. Осы қателермен жұмыс істеп, қайталаңыз.";
+  } else {
+    resultMsg.textContent = "Көбірек дайындалу керек";
+    resultSub.textContent = "Нәтиже төмен. Экзамен алдында Кабинетке кіріп, сұрақтарды қайта оқып шығуды ұсынамыз.";
+  }
+  
+  // Вывод работы над ошибками
+  mistakesSection.innerHTML = '';
+  const wrongs = userAnswers.filter(a => !a.isCorrect);
+  
+  if (wrongs.length === 0) {
+    mistakesSection.innerHTML = `<div class="all-clear">🎈 Қателер жоқ! Сіз барлық сұрақтарға дұрыс жауап бердіңіз.</div>`;
+  } else {
+    const title = document.createElement('div');
+    title.className = 'mistakes-title';
+    title.innerHTML = `Қателермен жұмыс <span class="count">${wrongs.length}</span>`;
+    mistakesSection.appendChild(title);
+    
+    const sub = document.createElement('div');
+    sub.className = 'mistakes-sub';
+    sub.textContent = 'Төменде сіз қателескен сұрақтар мен олардың дұрыс түсіндірмелері берілген:';
+    mistakesSection.appendChild(sub);
+    
+    wrongs.forEach(w => {
+      const card = document.createElement('div');
+      card.className = 'mistake-card';
+      card.innerHTML = `
+        <div class="mq">${escapeHtml(w.q.question)}</div>
+        <div class="mistake-line your">Сіздің жауабыңыз: <b>${w.chosen}) ${escapeHtml(w.q.options[w.chosen])}</b></div>
+        <div class="mistake-line right">Дұрыс нұсқа: <b>${w.q.correct}) ${escapeHtml(w.q.options[w.q.correct])}</b></div>
+        <div class="mistake-explain"><b>Түсіндірме:</b> ${escapeHtml(w.q.explanation)}</div>
+      `;
+      mistakesSection.appendChild(card);
+    });
+  }
+}
+
+restartBtn.addEventListener('click', () => {
+  switchScreen(screenStart);
+  topBadge.textContent = "СТАРТ";
+});
+
+// КАБИНЕТ (ЭКРАН ИЗУЧЕНИЯ)
+openStudyBtn.addEventListener('click', () => {
+  switchScreen(screenStudy);
+  topBadge.textContent = "КАБИНЕТ";
+  renderStudyContent();
+});
+
+backFromStudyBtn.addEventListener('click', () => {
+  switchScreen(screenStart);
+  topBadge.textContent = "СТАРТ";
+});
+
+function renderStudyContent() {
+  studyContent.innerHTML = '';
+  
+  VARIANTS_CONFIG.forEach(vConfig => {
+    const vQuestions = QUESTIONS.filter(q => q.variant === vConfig.id);
+    
+    const details = document.createElement('details');
+    details.className = 'details-variant';
+    
+    const summary = document.createElement('summary');
+    summary.innerHTML = `
+      <span>${vConfig.title}</span>
+      <span class="meta">${vQuestions.length} сұрақ</span>
+      <span class="chevron">▼</span>
+    `;
+    
+    const body = document.createElement('div');
+    body.className = 'details-body';
+    
+    vQuestions.forEach(q => {
+      const qCard = document.createElement('div');
+      qCard.className = 'study-card';
+      
+      let optionsHtml = '';
+      Object.keys(q.options).forEach(letter => {
+        const isCorrect = (letter === q.correct);
+        optionsHtml += `
+          <div class="study-option ${isCorrect ? 'correct' : ''}">
+            <div class="letter">${letter}</div>
+            <div class="text">${escapeHtml(q.options[letter])}</div>
+            ${isCorrect ? '<span class="check">✓</span>' : ''}
+          </div>
+        `;
+      });
+      
+      qCard.innerHTML = `
+        <div class="study-q">${q.num}. ${escapeHtml(q.question)}</div>
+        <div class="study-options">${optionsHtml}</div>
+        <div class="study-explain"><b>Түсіндірме:</b> ${escapeHtml(q.explanation)}</div>
+      `;
+      body.appendChild(qCard);
+    });
+    
+    details.appendChild(summary);
+    details.appendChild(body);
+    studyContent.appendChild(details);
+  });
+}
+
+expandAllBtn.addEventListener('click', () => {
+  document.querySelectorAll('.details-variant').forEach(d => d.open = true);
+});
+collapseAllBtn.addEventListener('click', () => {
+  document.querySelectorAll('.details-variant').forEach(d => d.open = false);
+});
+
+// ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+function romanize(num) {
+  if (num === 1) return 'I';
+  if (num === 2) return 'II';
+  if (num === 3) return 'III';
+  if (num === 4) return 'IV';
+  return num;
+}
+
+// Защита от поломок разметки при выводе HTML-тегов, вроде <div> и <span>
+function escapeHtml(text) {
+  if (!text) return '';
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+// Запуск
+initApp();
 </script>
 </body>
 </html>
