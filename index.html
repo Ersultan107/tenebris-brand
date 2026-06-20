@@ -187,7 +187,31 @@
   }
   .set-card.full .num{color:white;font-size:18px;}
   .set-card.full .meta{color:#c7d6f7;}
+  .set-card.full.random{
+    background:linear-gradient(135deg, #1d4ed8, #2563EB);
+  }
   .set-card.full.selected{outline:3px solid var(--accent-soft-2);}
+  .shuffle-row{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    border:1.5px solid var(--border); border-radius:var(--radius-md);
+    padding:14px 16px; margin-bottom:6px; background:var(--bg-soft);
+  }
+  .shuffle-row .label{display:flex; align-items:center; gap:10px; font-size:14px; font-weight:600; color:var(--ink);}
+  .switch{
+    position:relative; width:46px; height:26px; flex-shrink:0;
+  }
+  .switch input{opacity:0; width:0; height:0; position:absolute;}
+  .switch .track{
+    position:absolute; inset:0; background:var(--border); border-radius:999px;
+    cursor:pointer; transition:background .2s ease;
+  }
+  .switch .track::before{
+    content:''; position:absolute; left:3px; top:3px; width:20px; height:20px;
+    background:white; border-radius:50%; transition:transform .2s ease; box-shadow:0 1px 3px rgba(0,0,0,0.25);
+  }
+  .switch input:checked + .track{background:var(--accent);}
+  .switch input:checked + .track::before{transform:translateX(20px);}
+  .switch input:focus-visible + .track{outline:2.5px solid var(--accent); outline-offset:2px;}
   .set-card.full .pill{
     font-size:11px;font-weight:700;background:rgba(255,255,255,0.16);
     padding:5px 10px;border-radius:999px;letter-spacing:.04em;
@@ -512,6 +536,14 @@
     <div class="section-label">Выберите вариант</div>
     <div class="set-grid" id="setGrid"></div>
 
+    <div class="shuffle-row">
+      <div class="label">🔀 Перемешать порядок вопросов</div>
+      <label class="switch">
+        <input type="checkbox" id="shuffleToggle">
+        <span class="track"></span>
+      </label>
+    </div>
+
     <button class="primary-btn" id="startBtn" disabled>Начать тест</button>
   </section>
 
@@ -620,6 +652,15 @@ const SETS = [
 ];
 const ROMAN = {1:'I',2:'II',3:'III',4:'IV'};
 
+function shuffleArray(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 let activeSetKey = null;
 let pool = [];
 let idx = 0;
@@ -667,6 +708,15 @@ function renderSetCards(){
   fullCard.addEventListener('click', ()=>selectSet('all', fullCard));
   fullCard.addEventListener('keydown', e=>{ if(e.key==='Enter') selectSet('all', fullCard); });
   setGrid.appendChild(fullCard);
+
+  const randomCard = document.createElement('div');
+  randomCard.className = 'set-card full random';
+  randomCard.tabIndex = 0;
+  randomCard.dataset.key = 'random25';
+  randomCard.innerHTML = `<div><div class="num">🎲 Случайный экзамен</div><div class="meta">25 случайных вопросов из всех вариантов, вперемешку</div></div><div class="pill">КАК НА ЭКЗАМЕНЕ</div>`;
+  randomCard.addEventListener('click', ()=>selectSet('random25', randomCard));
+  randomCard.addEventListener('keydown', e=>{ if(e.key==='Enter') selectSet('random25', randomCard); });
+  setGrid.appendChild(randomCard);
 }
 function selectSet(key, cardEl){
   activeSetKey = key;
@@ -678,7 +728,17 @@ renderSetCards();
 
 document.getElementById('startBtn').addEventListener('click', ()=>{
   if(!activeSetKey) return;
-  pool = activeSetKey === 'all' ? QUESTIONS.slice() : QUESTIONS.filter(q=>String(q.variant)===activeSetKey);
+  const shuffleOn = document.getElementById('shuffleToggle').checked;
+
+  if(activeSetKey === 'random25'){
+    pool = shuffleArray(QUESTIONS).slice(0, 25);
+  } else if(activeSetKey === 'all'){
+    pool = shuffleOn ? shuffleArray(QUESTIONS) : QUESTIONS.slice();
+  } else {
+    const filtered = QUESTIONS.filter(q=>String(q.variant)===activeSetKey);
+    pool = shuffleOn ? shuffleArray(filtered) : filtered;
+  }
+
   idx = 0; correctCount = 0; mistakes = [];
   showScreen('quiz');
   renderQuestion();
